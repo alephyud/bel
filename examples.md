@@ -1,5 +1,5 @@
 # Bel Examples for Lisp Programmers
-12 Oct 2019
+By [Paul Graham](https://sep.yimg.com/ty/cdn/paulgraham/belexamples.txt?t=1570993483&), 12 Oct 2019
 
 
 When I hear about a new language, the first thing I want to see is
