@@ -1,10 +1,10 @@
 # The Bel Language
 
-This is a mirror of Paul Graham's [Bel language](http://paulgraham.com/bel.html)
-web page, converted to Markdown and provided with syntax highlighting
-for ease of reading.
+This is a mirror of Paul Graham's [Bel language](http://paulgraham.com/bel.html) web page.
 
-- Below is the text of the [language guide](https://sep.yimg.com/ty/cdn/paulgraham/bellanguage.txt?t=1570993483&) with Markdown mark-up.
+While the original web page is in plain text, this page adds minor Markdown-based typographical improvements and syntax highlighing (based on the existing Lisp syntax highlighting rules). The purpose of this mirror is to make Bel language documents accessible to a wider audience by making it easier to read.
+
+- Below is the text of the [language guide](https://sep.yimg.com/ty/cdn/paulgraham/bellanguage.txt?t=1570993483&) in Markdown.
 - [This](./bel.bel.lisp) is Bel's [source code](https://sep.yimg.com/ty/cdn/paulgraham/bel.bel?t=1570993483&) (`.lisp` extension is added for syntax highlighting);
 - [This](./examples.md) is the file of Bel [code examples](https://sep.yimg.com/ty/cdn/paulgraham/belexamples.txt?t=1570993483&).
 
