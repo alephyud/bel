@@ -90,7 +90,7 @@ nil
 ```
 
 A couple definitions will give a sense of what programs are like.
-Here's part, which returns a partially applied function:
+Here's `part`, which returns a partially applied function:
 
 ```lisp
 (def part (f . args)
@@ -98,7 +98,7 @@ Here's part, which returns a partially applied function:
     (apply f (append args rest))))
 ```
 
-Here are insert and sort, which insert an object into a (presumably 
+Here are `insert` and `sort`, which insert an object into a (presumably 
 sorted) list, and sort a list respectively:
 
 ```lisp
@@ -111,7 +111,7 @@ sorted) list, and sort a list respectively:
   (foldr (part insert f) nil (rev xs)))
 ```
 
-And here's the pop macro:
+And here's the `pop` macro:
 
 ```lisp
 (mac pop (place)
