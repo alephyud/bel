@@ -1,10 +1,12 @@
-Bel Examples for Lisp Programmers   12 Oct 2019
+# Bel Examples for Lisp Programmers
+By [Paul Graham](https://sep.yimg.com/ty/cdn/paulgraham/belexamples.txt?t=1570993483&), 12 Oct 2019
 
 
 When I hear about a new language, the first thing I want to see is
 code examples. Programmers with significant experience in some dialect
 of Lisp will probably be able to understand the following repl session.
 
+```lisp
 > (cons 'a 'b '(c d e))
 (a b c d e)
 > (cons \h "ello")
@@ -85,17 +87,21 @@ nil
 (lit arr 11 12)
 > (z 1 1)
 21
+```
 
 A couple definitions will give a sense of what programs are like.
-Here's part, which returns a partially applied function:
+Here's `part`, which returns a partially applied function:
 
+```lisp
 (def part (f . args)
   (fn rest
     (apply f (append args rest))))
+```
 
-Here are insert and sort, which insert an object into a (presumably 
+Here are `insert` and `sort`, which insert an object into a (presumably 
 sorted) list, and sort a list respectively:
 
+```lisp
 (def insert (f x ys)
   (if (no ys)        (list x)
       (f x (car ys)) (cons x ys)
@@ -103,14 +109,17 @@ sorted) list, and sort a list respectively:
 
 (def sort (f xs)
   (foldr (part insert f) nil (rev xs)))
+```
 
-And here's the pop macro:
+And here's the `pop` macro:
 
+```lisp
 (mac pop (place)
   `(let (cell loc) (where ,place)
      (let xs ((case loc a car d cdr) cell)
        ((case loc a xar d xdr) cell (cdr xs))
        (car xs))))
+```
 
 The best way to see what Bel programs are like, of course, is to read
-the Bel source, which is a Bel program.
+the [Bel source](./bel.bel.lisp), which is a Bel program.
