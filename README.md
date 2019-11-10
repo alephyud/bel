@@ -1,10 +1,10 @@
 # The Bel Language
 
-This is a mirror of Paul Graham's [Bel language](http://paulgraham.com/bel.html)
-web page, converted to Markdown and provided with syntax highlighting
-for ease of reading.
+This is a mirror of Paul Graham's [Bel language](http://paulgraham.com/bel.html) web page.
 
-- Below is the text of the [language guide](https://sep.yimg.com/ty/cdn/paulgraham/bellanguage.txt?t=1570993483&) with Markdown mark-up.
+While the original web page is in plain text, this page adds minor Markdown-based typographical improvements and syntax highlighing (based on the existing Lisp syntax highlighting rules). The purpose of this mirror is to make Bel language documents accessible to a wider audience by making it easier to read.
+
+- Below is the text of the [language guide](https://sep.yimg.com/ty/cdn/paulgraham/bellanguage.txt?t=1570993483&) in Markdown.
 - [This](./bel.bel.lisp) is Bel's [source code](https://sep.yimg.com/ty/cdn/paulgraham/bel.bel?t=1570993483&) (`.lisp` extension is added for syntax highlighting);
 - [This](./examples.md) is the file of Bel [code examples](https://sep.yimg.com/ty/cdn/paulgraham/belexamples.txt?t=1570993483&).
 
@@ -40,7 +40,7 @@ of code. It does only as much as it has to in order to interpret
 expressions. Everything else got added in the implementation phase.
 
 My hypothesis is that, though an accident of history, it was a good 
-thing for Lisp that its development happened in two phases-- that
+thing for Lisp that its development happened in two phases — that
 the initial exercise of defining the language by writing an 
 interpreter for it in itself is responsible for a lot of Lisp's best 
 qualities. And if so, why not do more of it?
@@ -1353,8 +1353,8 @@ and it was called thus
 (apply list x)
 ```
 
-then the value that `list` returned would be the same list as `x` -- not 
-merely a list with the same elements, but the same pair -- meaning if
+then the value that `list` returned would be the same list as `x` — not 
+merely a list with the same elements, but the same pair — meaning if
 we modified the value we got from `list`, we'd also be modifying the 
 object up in the calling code.
 
@@ -1767,8 +1767,8 @@ arguments, and also of `mac`, which does the same with macro.
 seeming layers on top of existing operators. It seems a sign of
 orthogonality.)
 
-If you were wondering why `fn` needs two cases -- why we don't just 
-always wrap a do around the body -- the reason is that `do` calls 
+If you were wondering why `fn` needs two cases — why we don't just 
+always wrap a do around the body — the reason is that `do` calls 
 `reduce`, which is defined using `def`, which expands into a `fn`. So to 
 avoid an infinite recursion we either have to define `reduce` as a 
 literal function, or make either `fn` or `do` consider the single 
@@ -2596,7 +2596,7 @@ itself, and we call `err` about it.
 
 This sort of code where things happen at two different levels --
 the Bel instance running the interpreter, and the Bel program that
-the interpreter is evaluating -- is inevitably a bit confusing, but 
+the interpreter is evaluating — is inevitably a bit confusing, but 
 that comes with the territory when a language is written in itself. 
 For errors, at least, there is a simple rule of thumb: when there's 
 an error in a program you're evaluating, you call `sigerr`, and when 
@@ -2867,13 +2867,13 @@ possible. I tried to let simplicity make as many decisions for me as
 I could.
 
 Like `where` and `dyn`, after works by putting a special entry on the 
-stack -- this time a `prot` entry. We saw what a `prot` entry means when
+stack — this time a `prot` entry. We saw what a `prot` entry means when
 examining `evmark`. All the after form does is create the `prot` entry;
 the real work happens elsewhere.
 
 The `ccc` form creates a continuation, or more precisely generates
 code that calls a function on a continuation. A continuation itself
-is a simple thing -- basically just `s` and `r`, which between them are a 
+is a simple thing — basically just `s` and `r`, which between them are a 
 complete representation of the state of the current thread.
 
 Finally, the `thread` form takes an expression and starts evaluating it
@@ -2883,8 +2883,8 @@ stacks much as we did up in bel. The second argument `(cons nil r)`
 means the thread expression itself returns `nil` in the thread in which 
 it occurs.
 
-Along with `lit` and `apply`, those seven operators-- `quote`, `if`, `where`, 
-`dyn`, `after`, `ccc`, and `thread` -- are all the special forms. But if you 
+Along with `lit` and `apply`, those seven operators — `quote`, `if`, `where`, 
+`dyn`, `after`, `ccc`, and `thread` — are all the special forms. But if you 
 need more you can easily define them with `form`.
 
 Now we come to the code that handles the last case in `ev`, an ordinary 
@@ -3656,7 +3656,7 @@ Notice that `bin<` has an explicit test for nil arguments. That's
 because `nil` is both a symbol and a string (the empty string).
 
 Then come a few more predicates on numbers which are mostly used in 
-type checking -- `int`, `whole`, and `pint` (positive integer). 
+type checking — `int`, `whole`, and `pint` (positive integer). 
 
 Next comes a familiar name, `yc`. This is the Y combinator, which is 
 used to generate recursive functions. It's used in `rfn` to make a 
@@ -3906,7 +3906,7 @@ because setting an unbound variable should create a binding for it,
 but zapping one shouldn't.
 
 With `zap` it becomes easy to write a whole class of other macros we 
-need, like `++` and `--,` which increase and decrease the value of 
+need, like `++` and `--`, which increase and decrease the value of 
 something
 
 ```lisp
