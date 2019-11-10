@@ -1,15 +1,15 @@
 # The Bel Language
 
-This is a mirror of Paul Graham's [Bel language](http://paulgraham.com/bel.html) web page.
+This is a mirror of the [Bel language](http://paulgraham.com/bel.html) web page.
 
-While the original web page is in plain text, this page adds minor Markdown-based typographical improvements and syntax highlighing (based on the existing Lisp syntax highlighting rules). The purpose of this mirror is to make Bel language documents accessible to a wider audience by making it easier to read.
+While the original web page is in plain text, this page adds minor Markdown-based typographical improvements and syntax highlighing (based on the existing Lisp syntax highlighting rules). The purpose of creating this page on Github was to make Bel language documentation easier to read - for my own convenience as well as to promote the awareness and discussion of the Bel language and Paul Graham's logic and ideas behind its creation.
 
 - Below is the text of the [language guide](https://sep.yimg.com/ty/cdn/paulgraham/bellanguage.txt?t=1570993483&) in Markdown.
 - [This](./bel.bel.lisp) is Bel's [source code](https://sep.yimg.com/ty/cdn/paulgraham/bel.bel?t=1570993483&) (`.lisp` extension is added for syntax highlighting);
 - [This](./examples.md) is the file of Bel [code examples](https://sep.yimg.com/ty/cdn/paulgraham/belexamples.txt?t=1570993483&).
 
 ## The Bel Language guide
-By Paul Graham, 12 Oct 2019
+*By Paul Graham, 12 Oct 2019*
 
 
 In 1960 John McCarthy described a new type of programming language
