@@ -9,7 +9,7 @@ for ease of reading.
 - [This](./examples.md) is the file of Bel [code examples](https://sep.yimg.com/ty/cdn/paulgraham/belexamples.txt?t=1570993483&).
 
 ## The Bel Language guide
-12 Oct 2019
+By Paul Graham, 12 Oct 2019
 
 
 In 1960 John McCarthy described a new type of programming language
@@ -881,7 +881,7 @@ Starting with the foregoing 25 operators, we're going to define more,
 till we can define a Bel interpreter. Then we'll continue, defining
 numbers, I/O, and several other things one needs in programs.
 
-These definition are in the Bel source, which is meant to be read in
+These definition are in the [Bel source](./bel.bel.lisp), which is meant to be read in
 parallel with this guide.
 
 In the Bel source, when you see an expression of the form 
