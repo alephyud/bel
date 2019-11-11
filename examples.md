@@ -6,7 +6,7 @@ When I hear about a new language, the first thing I want to see is
 code examples. Programmers with significant experience in some dialect
 of Lisp will probably be able to understand the following repl session.
 
-```lisp
+```
 > (cons 'a 'b '(c d e))
 (a b c d e)
 > (cons \h "ello")
@@ -92,7 +92,7 @@ nil
 A couple definitions will give a sense of what programs are like.
 Here's `part`, which returns a partially applied function:
 
-```lisp
+```
 (def part (f . args)
   (fn rest
     (apply f (append args rest))))
@@ -101,7 +101,7 @@ Here's `part`, which returns a partially applied function:
 Here are `insert` and `sort`, which insert an object into a (presumably 
 sorted) list, and sort a list respectively:
 
-```lisp
+```
 (def insert (f x ys)
   (if (no ys)        (list x)
       (f x (car ys)) (cons x ys)
@@ -113,7 +113,7 @@ sorted) list, and sort a list respectively:
 
 And here's the `pop` macro:
 
-```lisp
+```
 (mac pop (place)
   `(let (cell loc) (where ,place)
      (let xs ((case loc a car d cdr) cell)
