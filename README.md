@@ -90,7 +90,7 @@ streams.
 
 Symbols are words:
 
-```lisp
+```
 foo
 ```
 
@@ -99,14 +99,14 @@ symbols.
 
 Pairs are pairs of any two things, and are represented thus:
 
-```lisp
+```
 (foo . bar)
 ```
 
 That's a pair of two symbols, foo and bar, but the two halves of a
 pair can be anything, including pairs:
 
-```lisp
+```
 (foo . (bar . baz))
 ```
 
@@ -115,14 +115,14 @@ That's a pair of the symbol foo, and the pair `(bar . baz)`.
 A character is represented by prepending a backslash to its name. So 
 the letter `a` is represented as
 
-```lisp
+```
 \a
 ```
 
 Characters that aren't letters may have longer names. For example the
 bell character, after which Bel is named, is
 
-```lisp
+```
 \bel
 ```
 
@@ -148,7 +148,7 @@ most fundamental way they're used is to make lists, as follows:
 
 Here's a list made from a pair:
 
-```lisp
+```
 (a . nil)
 ```
 
@@ -159,13 +159,13 @@ is a list of one element, the symbol `a`.
 By nesting such pairs we can create lists of any length. Here is a
 list of two elements, the symbols `a` and `b`:
 
-```lisp
+```
 (a . (b . nil))
 ```
 
 And here is a list of a, b, and c:
 
-```lisp
+```
 (a . (b . (c . nil)))
 ```
 
@@ -180,13 +180,13 @@ abbreviated notation that's more convenient:
 
 By repeated application of these two rules we can transform
 
-```lisp
+```
 (a . (b . (c . nil)))
 ```
 
 into
 
-```lisp
+```
 (a b c)
 ```
 
@@ -197,7 +197,7 @@ unless there was some special reason to.
 Because any object can be part of a pair, the elements of lists can
 themselves be lists. All these are lists too:
 
-```lisp
+```
 (a (b) c)
 ((a b c))
 (nil)
@@ -207,13 +207,13 @@ Pairs like these, where if you keep looking at the second half you
 eventually hit a nil, are called proper lists. This is a proper
 list:
 
-```lisp
+```
 (a b c)
 ```
 
 and this is not:
 
-```lisp
+```
 (a b . c)
 ```
 
@@ -225,13 +225,13 @@ you need to use dot notation to represent it).
 A proper list of characters is called a string, and can also be
 represented as those characters within double-quotes. So the list
 
-```lisp
+```
 (\h \e \l \l \o)
 ```
 
 can also be represented as
 
-```lisp
+```
 "hello"
 ```
 
@@ -259,7 +259,7 @@ and return one object.
 Functions are represented using lists. For example, here is a
 function that takes one argument, and returns that plus 1.
 
-```lisp
+```
 (lit clo nil (x) (+ x 1))
 ```
 
@@ -281,7 +281,7 @@ function returns.
 You would not ordinarily express a function using its literal 
 representation. Usually you'd say
 
-```lisp
+```
 (fn (x) (+ x 1))
 ```
 
@@ -306,7 +306,7 @@ When an expression is evaluated, there are three possible outcomes:
 Some expressions also do things in the process of being evaluated.
 For example,
 
-```lisp
+```
 (prn 1)
 ```
 
@@ -320,7 +320,7 @@ error if they don't have a value.
 A proper list whose first element evaluates to a function is called
 a function call. For example, the expression
 
-```lisp
+```
 (+ x 1)
 ```
 
@@ -329,7 +329,7 @@ of a function call is the object that the function returns.
 
 Function calls are evaluated left to right. For example, when
 
-```lisp
+```
 (+ 8 5)
 ```
 
@@ -348,7 +348,7 @@ is evaluated,
 If we want to show what expressions evaluate to, it's conventional to 
 show them being evaluated in a repl:
 
-```lisp
+```
 > (+ 8 5)
 13
 ```
@@ -357,7 +357,7 @@ Expressions can be nested. The rule of evaluating left to right means
 that nested function calls are evaluated depth-first. For example, 
 when
 
-```lisp
+```
 (+ (- 5 2) 7)
 ```
 
@@ -371,7 +371,7 @@ defined for that special form.
 
 For example, if is a special form, and when an expression of the form
 
-```lisp
+```
 (if test then else)
 ```
 
@@ -395,7 +395,7 @@ the set of global bindings is called the global environment.
 Another way a variable can have a value is by being a parameter in a 
 function. When the function
 
-```lisp
+```
 (fn (x) (+ x 1))
 ```
 
@@ -478,7 +478,7 @@ first because so many code examples use it.
 It returns its argument without evaluating it. Its purpose is to 
 prevent evaluation.
 
-```lisp
+```
 > (quote a)
 a
 ```
@@ -486,7 +486,7 @@ a
 Prepending `'` to an expression is equivalent to wrapping a quote
 around it.
 
-```lisp
+```
 > 'a
 a
 ```
@@ -496,7 +496,7 @@ and data. If you want to talk about the symbol `a`, you have to quote
 it. Otherwise it will be treated as a variable, and you'll get its
 value. E.g. if `a` has been set to 10:
 
-```lisp
+```
 > a
 10
 > 'a
@@ -520,7 +520,7 @@ be signalled.
 
 Returns true iff x and y are identical. 
 
-```lisp
+```
 > (id 'a 'a)
 t
 > (id 'a 'b)
@@ -532,7 +532,7 @@ symbol and character, there can be any number of different pairs with
 the same elements. So two pairs can look the same without being
 identical:
 
-```lisp
+```
 > (id '(a b) '(a b))
 nil
 ```
@@ -545,7 +545,7 @@ test for equality. Usually you'd use `=`.
 
 Returns a new pair whose first half is `x` and second half is `y`.
 
-```lisp
+```
 > (join 'a 'b)
 (a . b)
 > (join 'a)
@@ -554,7 +554,7 @@ Returns a new pair whose first half is `x` and second half is `y`.
 
 A pair returned by `join` will not be `id` to any existing pair.
 
-```lisp
+```
 > (id (join 'a 'b) (join 'a 'b))
 nil
 ```
@@ -564,7 +564,7 @@ nil
 
 Returns the first half of a pair:
 
-```lisp
+```
 > (car '(a . b))
 a
 > (car '(a b))
@@ -573,7 +573,7 @@ a
 
 The `car` of `nil` is `nil`,
 
-```lisp
+```
 > (car nil)
 nil
 ```
@@ -590,7 +590,7 @@ change it.
 
 Returns the second half of a pair:
 
-```lisp
+```
 > (cdr '(a . b))
 b
 > (cdr '(a b))
@@ -609,7 +609,7 @@ the first element and the rest of the list respectively.
 Returns either symbol, pair, char, or stream depending on the type
 of `x`.
 
-```lisp
+```
 > (type 'a)
 symbol
 > (type '(a))
@@ -626,7 +626,7 @@ not a pair.
 
 If we assume that the value of `x` is `(a . b)`, then
 
-```lisp
+```
 > x
 (a . b)
 > (xar x 'c)
@@ -640,7 +640,7 @@ c
 
 Like `xar`, except that it replaces the `cdr` of `x`.
 
-```lisp
+```
 > x
 (c . b)
 > (xdr x 'd)
@@ -655,7 +655,7 @@ d
 Returns the symbol whose name is the elements of `x`. Signals an error
 if `x` is not a string.
 
-```lisp
+```
 > (sym "foo")
 foo
 ```
@@ -666,7 +666,7 @@ foo
 Returns a fresh list of the characters in the name of `x`. Signals an 
 error if `x` is not a symbol.
 
-```lisp
+```
 > (nom 'foo)
 "foo"
 ```
@@ -733,7 +733,7 @@ Returns the whole lit expression without evaluating it. A lit is like
 a persistent quote; evaluation strips the quote off a quote 
 expression, but leaves a lit expression intact.
 
-```lisp
+```
 > (quote a)
 a
 > (lit a)
@@ -747,7 +747,7 @@ numbers.
 
 The value of a primitive `p` is `(lit prim p)`. 
 
-```lisp
+```
 > car
 (lit prim car)
 ```
@@ -757,7 +757,7 @@ The value of a primitive `p` is `(lit prim p)`.
 
 An if expression with an odd number of arguments
 
-```lisp
+```
 (if a1 a2 a3 a4 ... an)
 ```
 
@@ -772,13 +772,13 @@ succeeding argument is evaluated and its value returned.
 
 An if expression with an even number of arguments
 
-```lisp
+```
 (if a1 a2 ... an)
 ```
 
 is equivalent to
 
-```lisp
+```
 (if a1 a2 ... an nil)
 ```
 
@@ -796,20 +796,20 @@ insist on 3 arguments.
 
 An expression of the form
 
-```lisp
+```
 (apply f x y ... z)
 ```
 
 is equivalent to
 
-```lisp
+```
 (f 'a 'b ... 'c1 ... 'cn)
 ```
 
 where `a` is the value of `x`, `b` the value of `y`, and the `ci` the elements 
 of the value of `z`.
 
-```lisp
+```
 > (join 'a 'b)
 (a . b)
 > (apply join '(a b))
@@ -831,7 +831,7 @@ a pair.
 
 For example, if `x` is `(a b c)`,
 
-```lisp
+```
 > (where (cdr x))
 ((a b c) d)
 ```
@@ -844,7 +844,7 @@ dynamically bound to the value of `x`.
 
 For example, if `x` is `a`,
 
-```lisp
+```
 > x
 a
 > (dyn x 'z (join x 'b))
@@ -886,7 +886,7 @@ parallel with this guide.
 
 In the Bel source, when you see an expression of the form 
 
-```lisp
+```
 (set v1 e1 ... vn en)
 ```
 
@@ -897,25 +897,25 @@ I've made a handful of exceptions to make the code easier to read.
 
 When you see
 
-```lisp
+```
 (def n p e)
 ```
 
 treat it as an abbreviation for 
 
-```lisp
+```
 (set n (lit clo nil p e))
 ```
 
 and when you see 
 
-```lisp
+```
 (mac n p e)
 ```
 
 treat it as an abbreviation for
 
-```lisp
+```
 (set n (lit mac (lit clo nil p e)))
 ```
 
@@ -924,13 +924,13 @@ much as we need to start with.
 
 Treat an expression in square brackets, e.g.
 
-```lisp
+```
 [f _ x]
 ```
 
 as an abbreviation for 
 
-```lisp
+```
 (fn (_) (f _ x))
 ```
 
@@ -941,7 +941,7 @@ Finally, treat an expression with a prepended backquote (`) as a
 quoted list, but with "holes," marked by commas, where evaluation 
 is turned back on again. 
 
-```lisp
+```
 > (set x 'a)
 a
 > `(x ,x y)
@@ -953,7 +953,7 @@ a
 You can also use `,@` to get a value spliced into the surrounding
 list:
 
-```lisp
+```
 > (set y '(c d))
 (c d)
 > `(a b ,@y e f)
@@ -965,7 +965,7 @@ no that takes one argument, `x`, and returns the result of using id to
 compare it to nil. So `no` returns `t` if its argument is nil, and nil 
 otherwise.
 
-```lisp
+```
 > (no nil)
 t
 > (no 'a)
@@ -978,7 +978,7 @@ logical negation and the test for the empty list.
 The second function, `atom`, returns true iff its argument is not a 
 pair. 
 
-```lisp
+```
 > (atom \a)
 t
 > (atom nil)
@@ -993,7 +993,7 @@ Next come a pair of similar functions, `all` and `some`. The former
 returns `t` iff its first argument returns true of all the elements of 
 its second,
 
-```lisp
+```
 > (all atom '(a b))
 t
 > (all atom nil)
@@ -1007,7 +1007,7 @@ any element of its second. However, when `some` returns true, it
 doesn't simply return `t`. It returns the remainder of the list 
 starting from the point where `f` was true of the first element. 
 
-```lisp
+```
 > (some atom '((a b) (c d)))
 nil
 > (some atom '((a b) c (d e)))
@@ -1034,7 +1034,7 @@ perhaps continuing down the cdr is very common.
 Something else is new in `all` and `some`: these are the first functions
 in the Bel source that you could cause an error by calling.
 
-```lisp
+```
 > (all atom 'a)
 Error: can't call car on a non-nil atom.
 ```
@@ -1045,7 +1045,7 @@ about repls. But some error will be signalled if you call all with a
 non-nil atom as the second argument, because in the second test 
 within the `if`
 
-```lisp
+```
 (f (car xs))
 ```
 
@@ -1057,7 +1057,7 @@ getting to more complex ones: these functions are not defined the
 way they would be in idiomatic Bel. For example, if all didn't 
 already exist in Bel you could define it as simply
 
-```lisp
+```
 (def all (f xs)
   (~some ~f xs))
 ```
@@ -1068,13 +1068,13 @@ it.
 The next function, `reduce`, is for combining the elements of its 
 second argument using nested calls to its first. For example 
 
-```lisp
+```
 (reduce f '(a b c d))
 ```
 
 is equivalent to
 
-```lisp
+```
 (f 'a (f 'b (f 'c 'd)))
 ```
 
@@ -1083,7 +1083,7 @@ reduce returns nil; since `(cdr nil)` is nil, we can check both these
 possibilities with `(no (cdr xs))`. Otherwise it calls `f` on the first
 element and `reduce` of `f` and the remaining elements.
 
-```lisp
+```
 > (reduce join '(a b c))
 (a b . c)
 ```
@@ -1097,7 +1097,7 @@ it helps humans read your code, but I've found three ways of
 indenting ifs that work well. If an if has more than two tests and 
 the arguments are sufficiently short, it works well to say
 
-```lisp
+```
 (if test1 then1
     test2 then2
           else)
@@ -1107,7 +1107,7 @@ We saw this in `all` and `some`. But if you only have one test, or some
 arguments are too long to fit two on one line, then it works better 
 to say
 
-```lisp
+```
 (if test1
     then1
     test2
@@ -1117,7 +1117,7 @@ to say
 
 or if an `if` is long, 
 
-```lisp
+```
 (if test1
      then1
     test2
@@ -1130,7 +1130,7 @@ or if an `if` is long,
 The next function, `cons`, has the name that `join` had in McCarthy's
 Lisp. It's the function you use to put things on the front of a list.
 
-```lisp
+```
 > (cons 'a '(b c))
 (a b c)
 ```
@@ -1138,7 +1138,7 @@ Lisp. It's the function you use to put things on the front of a list.
 If you only want to put one thing on the front of a list, you could
 use `join`.
 
-```lisp
+```
 > (join 'a '(b c))
 (a b c)
 ```
@@ -1146,7 +1146,7 @@ use `join`.
 With `cons`, however, you can supply more than one thing to put on the
 front:
 
-```lisp
+```
 > (cons 'a 'b 'c '(d e f))
 (a b c d e f)
 ```
@@ -1159,13 +1159,13 @@ parameter, `args`, instead of a list of parameters. When a function has
 a single parameter, its value will be a list of all the arguments 
 supplied when the function is called. So if we call cons thus
 
-```lisp
+```
 (cons 'a 'b '(c d))
 ```
 
 the value of `args` will be
 
-```lisp
+```
 (a b (c d))
 ```
 
@@ -1175,13 +1175,13 @@ the corresponding values; otherwise an error is signalled.
 
 So for example if a function `f` has the parameter list
 
-```lisp
+```
 (x . y) 
 ```
 
 and it's called
 
-```lisp
+```
 (f 'a 'b 'c)
 ```
 
@@ -1189,13 +1189,13 @@ then `x` will be `a`, and `y` will be `(b c)`.
 
 If the same function is called
 
-```lisp
+```
 (f 'a)
 ```
 
 then `x` will be `a`, and `y` will be nil. And if it's called
 
-```lisp
+```
 (f)
 ```
 
@@ -1203,27 +1203,27 @@ you'll get an error because there is no value for `x`.
 
 If a function `f` has the parameter list 
 
-```lisp
+```
 ((x y) z)
 ```
 
 and is called
 
-```lisp
+```
 (f '(a (b c)) '(d))
 ```
 
 then `x` will be `a`, `y` will be `(b c)`, and `z` will be `(d)`. Whereas if it's 
 called
 
-```lisp
+```
 (f '(a) '(d))
 ```
 
 you'll get an error because there is no value for `y`, and if it's 
 called
 
-```lisp
+```
 (f '(a b c) '(d))
 ```
 
@@ -1231,7 +1231,7 @@ you'll get an error because there is no parameter for `c`.
 
 The next function, `append`, joins lists together:
 
-```lisp
+```
 > (append '(a b c) '(d e f))
 (a b c d e f)
 > (append '(a) nil '(b c) '(d e f))
@@ -1241,7 +1241,7 @@ The next function, `append`, joins lists together:
 Its definition will be easier to understand if we look first at a 
 two-argument version.
 
-```lisp
+```
 (def append2 (xs ys)
   (if (no xs)
       ys
@@ -1252,13 +1252,13 @@ In English, if `xs` is empty, then just return `ys`. Otherwise return the
 result of consing the first element of `xs` onto append of the rest of 
 `xs` and `ys`. I.e. 
 
-```lisp
+```
 (append2 '(a b c) '(d e f))
 ```
 
 becomes
 
-```lisp
+```
 (cons 'a (append2 '(b c) '(d e f)))
 ```
 
@@ -1274,13 +1274,13 @@ argument like an ordinary function.
 Its purpose is in effect to spread out the elements of a list as if 
 they were the arguments in a function call. For example
 
-```lisp
+```
 (apply f '(a b))
 ```
 
 is equivalent to 
 
-```lisp
+```
 (f 'a 'b)
 ```
 
@@ -1288,13 +1288,13 @@ In the general case apply can take one or more arguments, and is
 equivalent to calling `apply` on the first argument and all the 
 intervening arguments `cons`ed onto the last. I.e.
 
-```lisp
+```
 (apply f x y z)
 ```
 
 is equivalent to
 
-```lisp
+```
 (apply f (cons x y z))
 ```
 
@@ -1320,14 +1320,14 @@ arguments in a list, instead of exactly two.
 Once we have `append` it's easy to define `snoc`, which as its name
 suggests is like a reverse `cons`,
 
-```lisp
+```
 > (snoc '(a b c) 'd 'e)
 (a b c d e)
 ```
 
 and `list`, which returns a list of its arguments.
 
-```lisp
+```
 > (list)
 nil
 > (list 'a)
@@ -1343,13 +1343,13 @@ also copy it.
 
 If we defined list as
 
-```lisp
+```
 (def list args args)
 ```
 
 and it was called thus
 
-```lisp
+```
 (apply list x)
 ```
 
@@ -1361,7 +1361,7 @@ object up in the calling code.
 After `list` we see map, which in the simplest case returns a list of
 calling its first argument on each element of its second.
 
-```lisp
+```
 > (map car '((a b) (c d) (e f)))
 (a c e)
 ```
@@ -1369,14 +1369,14 @@ calling its first argument on each element of its second.
 However, `map` can take any number of lists, and calls its first 
 argument on successive sets of elements from the others.
 
-```lisp
+```
 > (map cons '(a b c) '(1 2 3))
 ((a . 1) (b . 2) (c . 3))
 ```
 
 It stops as soon as one list runs out
 
-```lisp
+```
 > (map cons '(a b c) '(1 2))
 ((a . 1) (b . 2))
 ```
@@ -1384,7 +1384,7 @@ It stops as soon as one list runs out
 Like `append`, `map` is easier to understand if we start with a version 
 that takes exactly two arguments.
 
-```lisp
+```
 (def map2 (f xs)
   (if (no xs)
       nil
@@ -1402,13 +1402,13 @@ lists can be collected in `ls`. We need an additional base case in case
 there are zero of them. Checking for the end of the list, which in 
 `map2` was
 
-```lisp
+```
 (no xs)
 ```
 
 now becomes 
 
-```lisp
+```
 (some no ls)
 ```
 
@@ -1438,27 +1438,27 @@ macro that isn't part of Bel, then explain `fn`.
 
 Here is a very simple macro:
 
-```lisp
+```
 (mac nilwith (x)
   (list 'cons nil x))
 ```
 
 This definition says that whenever you see an expression like
 
-```lisp
+```
 (nilwith 'a)
 ```
 
 transform it into 
 
-```lisp
+```
 (cons nil 'a)
 ```
 
 and then evaluate that and return its value as the value of the call 
 to nilwith.
 
-```lisp
+```
 > (nilwith 'a)
 (nil . a)
 ```
@@ -1480,14 +1480,14 @@ in the macro call, and whatever it returns is the macro expansion.
 
 For example, the value of `nilwith` will be equivalent to
 
-```lisp
+```
 (lit mac (lit clo nil (x) (list 'cons nil x))))
 ```
 
 If we look at the third element, we see the function that generates 
 expansions
 
-```lisp
+```
 (lit clo nil (x) (list 'cons nil x))
 ```
 
@@ -1498,7 +1498,7 @@ expressions look as much as possible like the resulting expressions.
 So if you defined nilwith you'd probably do it not as we did above
 but as
 
-```lisp
+```
 (mac nilwith (x)
   `(cons nil ,x))
 ```
@@ -1506,7 +1506,7 @@ but as
 Now let's work our way up to fn, starting with the following 
 simplified version:
 
-```lisp
+```
 (mac fn- (parms expr)
   `(lit clo nil ,parms ,expr))
 ```
@@ -1521,7 +1521,7 @@ This is less powerful than the actual fn macro in two ways.
 But if we don't need either of these things, the functions made by
 `fn-` work fine:
 
-```lisp
+```
 > ((fn- (x y) (cons x y)) 'a 'b)
 (a . b)
 ```
@@ -1541,7 +1541,7 @@ Let's try making one by hand with some variable bindings in it. An
 environment is a list of `(var . val)` pairs, so to make a closure we 
 put such a list in the third position of a `clo`, like this:
 
-```lisp
+```
 (lit clo ((x . a)) (y) (cons x y))
 ```
 
@@ -1549,7 +1549,7 @@ This closure includes an environment in which `x` has the value `a`. It
 has one parameter, `y`, and when called returns the value of `x` consed 
 onto whatever we give as an argument.
 
-```lisp
+```
 > ((lit clo ((x . a)) (y) (cons x y)) 'b)
 (a . b)
 ```
@@ -1565,14 +1565,14 @@ In Bel you can get hold of the global and lexical environments using
 the variables `globe` and `scope` respectively. So for example if we 
 define `foo` as
 
-```lisp
+```
 (def foo (x)
   scope)
 ```
 
 then it will work something like this
 
-```lisp
+```
 > (foo 'a)
 ((x . a))
 > (foo 'b)
@@ -1588,7 +1588,7 @@ while `fn-` expands into a `lit` expression, `fn` expands into a call to
 `list` rather than an actual list in a function call; functions are 
 just lists after all.
 
-```lisp
+```
 > ((list 'lit 'clo nil '(x) '(+ x 1)) 2)
 3
 ```
@@ -1599,7 +1599,7 @@ including `scope` in the arguments to `list`.
 
 Here's an example where we do this manually:
 
-```lisp
+```
 (def bar (x)
   ((list 'lit 'clo scope '(y) '(+ x y)) 2))
 ```
@@ -1607,7 +1607,7 @@ Here's an example where we do this manually:
 Within `bar` we call a hand-made closure that includes `scope`, which, as
 we know from the example of foo above, will include a value for `x`.
 
-```lisp
+```
 > (bar 3)
 5
 ```
@@ -1615,7 +1615,7 @@ we know from the example of foo above, will include a value for `x`.
 The fn macro generates as its expansion exactly what we just made by 
 hand. So this is equivalent to the definition above:
 
-```lisp
+```
 (def bar (x)
   ((fn (y) (+ x y)) 2))
 ```
@@ -1627,20 +1627,20 @@ more than one expression.
 If we call `fn` with two arguments, meaning a parameter list and an
 expression, as in e.g.
 
-```lisp
+```
 (fn (x) (cons 'a x))
 ```
 
 then `(cdr body)` will be false, so the expansion will be
 
-```lisp
+```
 (list 'lit 'clo scope '(x) '(cons 'a x))
 ```
 
 If we call `fn` with three or more arguments, meaning a parameter list 
 plus two or more expressions, e.g.
 
-```lisp
+```
 (fn (x) 
   (prn 'hello) 
   (cons 'a x))
@@ -1648,7 +1648,7 @@ plus two or more expressions, e.g.
 
 Then the expansion wraps a `do` around the expressions.
 
-```lisp
+```
 (list 'lit 'clo scope '(x) '(do (prn 'hello) (cons 'a x)))
 ```
 
@@ -1674,7 +1674,7 @@ code.
 Suppose you want to evaluate two expressions in order and then return
 the value of the last.
 
-```lisp
+```
 e1
 e2
 ```
@@ -1682,14 +1682,14 @@ e2
 You can make this happen by embodying `e2` in a function that you then 
 call on `e1`. 
 
-```lisp
+```
 ((fn x e2) e1)
 ```
 
 When this expression is evaluated, e1 will be evaluated first, and 
 its value passed to the function in the car of the call:
 
-```lisp
+```
 (fn x e2)
 ```
 
@@ -1702,13 +1702,13 @@ deal with that in a minute.)
 This technique generalizes to blocks of any size. Here's one with 3 
 expressions:
 
-```lisp
+```
 ((fn x ((fn x e3) e2)) e1)
 ```
 
 You can use `reduce` to generate this kind of expression as follows
 
-```lisp
+```
 (def block args
   (reduce (fn (x y)
             (list (list 'fn 'x y) x))
@@ -1733,7 +1733,7 @@ don't care what parameter we use, so long as it's unique.
 If you want to establish a lexical binding for some variable, you do
 it with `let`, which is a very simple macro upon `fn`.
 
-```lisp
+```
 > (let x 'a 
     (cons x 'b))
 (a . b)
@@ -1742,7 +1742,7 @@ it with `let`, which is a very simple macro upon `fn`.
 Since `let` expands into a `fn`, you have the full power of Bel parameter 
 lists in the first argument.
 
-```lisp
+```
 > (let (x . y) '(a b c) 
     (list x y))
 (a (b c))
@@ -1752,7 +1752,7 @@ The `macro` macro is analogous to the `fn` macro in that it returns a
 literal macro. You'll rarely use these directly, but you could if you 
 wanted to.
 
-```lisp
+```
 > ((macro (v) `(set ,v 'a)) x)
 a
 > x
@@ -1780,7 +1780,7 @@ programming languages, it only evaluates as many arguments as it
 needs to, which means you can use it for control flow as well as
 logical disjunction.
 
-```lisp
+```
 > (or 'a (prn 'hello))
 a
 ```
@@ -1794,13 +1794,13 @@ constructing a circular list and applying or to it.)
 
 In effect
 
-```lisp
+```
 (or foo bar)
 ```
 
 expands into
 
-```lisp
+```
 (let x foo
   (if x 
       x
@@ -1815,7 +1815,7 @@ values, and instead have to use `uvar`s.
 
 Notice incidentally that the expression above could be optimized
 
-```lisp
+```
 (let x foo
   (if x
       x
@@ -1831,7 +1831,7 @@ do that you get only the logical aspect of `or` and not the control
 aspect, since in a call to apply the arguments have already all been
 evaluated.
 
-```lisp
+```
 > (apply or '(nil nil))
 nil
 > (apply or '(nil a b))
@@ -1842,13 +1842,13 @@ The `and` macro is similar in spirit to `or`, but different in its
 implementation. Whereas or uses recursion to generate its expansion, 
 and uses reduce. Since 
 
-```lisp
+```
 (and w x y z) 
 ```
 
 is equivalent to
 
-```lisp
+```
 (if w (if x (if y z)))
 ```
 
@@ -1869,7 +1869,7 @@ The next function, `=`, is the one that programs usually use to test
 for equality. It returns true iff its arguments are trees of the same 
 shape whose leaves are the same atoms.
 
-```lisp
+```
 > (id '(a b) '(a b))
 nil
 > (= '(a b) '(a b))
@@ -1884,13 +1884,13 @@ for identical list structure.
 In the definition of `=` we see the first instance of square bracket
 notation. 
 
-```lisp
+```
 (all [id _ (car args)] (cdr args))
 ```
 
 This is equivalent to
 
-```lisp
+```
 (all (fn (x) (id x (car args))) 
      (cdr args))
 ```
@@ -1904,7 +1904,7 @@ If `id` took any number of arguments (it doesn't, because I want axioms
 to be as weak as possible), the preceding all expression could have 
 been simply
 
-```lisp
+```
 (apply id args)
 ```
 
@@ -1917,7 +1917,7 @@ Then we see `proper`, which tells us whether something is a proper
 list. Informally, a proper list is one that we don't need a dot to
 display.
 
-```lisp
+```
 > (proper nil)
 t
 > (proper '(a . b))
@@ -1933,14 +1933,14 @@ says.
 In Bel, a proper list of characters is called a string, and has a 
 special notation: zero or more characters within double quotes.
 
-```lisp
+```
 > (string "foo")
 t
 ```
 
 The next function, mem, tests for list membership.
 
-```lisp
+```
 > (mem 'b '(a b c))
 (b c)
 > (mem 'e '(a b c))
@@ -1959,7 +1959,7 @@ can be followed by an expression, and if no value is supplied for the
 parameter in the call, it gets the value of that expression instead 
 (or `nil` if there isn't one). So
 
-```lisp
+```
 > ((fn (x (o y)) y) 'a)
 nil
 > ((fn (x (o y 'b)) y) 'a)
@@ -1970,7 +1970,7 @@ The optional parameter doesn't have to be a single symbol; it can be
 a full parameter list. An example will be easier to understand if we 
 use let:
 
-```lisp
+```
 > (let (x (o (y . z) '(a . b))) '(f)
     (list x y z))
 (f a b)
@@ -1981,7 +1981,7 @@ function, which defaults, as such functions usually will, to `=`.
 By supplying different comparison functions we can get different 
 behaviors out of `mem`.
 
-```lisp
+```
 > (mem 3 '(2 4 6 8) >)
 (4 6 8)
 ```
@@ -2004,7 +2004,7 @@ default. Otherwise the default is `nil`.
 
 E.g. this function 
 
-```lisp
+```
 (def sname (s)
   (case s 
     + 'plus
@@ -2014,7 +2014,7 @@ E.g. this function
 
 returns the name of a sign represented by a symbol:
 
-```lisp
+```
 > (sname '+)
 plus
 ```
@@ -2024,7 +2024,7 @@ like an ordinary `if`, except that it takes an initial variable, which
 in any then expression will be lexically bound to the value returned 
 by the preceding test expression.
 
-```lisp
+```
 > (iflet x nil      'foo
            '(a b c) (car x)
                     'bar)
@@ -2038,7 +2038,7 @@ and both work through their arguments two at a time.
 We use `iflet` to define `aif`, which implicitly binds the variable `it`
 to the value of the preceding test expression.
 
-```lisp
+```
 > (map (fn (x)
          (aif (cdr x) (car it)))
        '((a) (b c) (d e f) (g)))
@@ -2051,7 +2051,7 @@ and if so returns the car of `it`.
 With `aif` and `some`, it's trivial to define `find`, which returns the
 first element of a list that matches some test.
 
-```lisp
+```
 > (find [= (car _) \a] 
         '("pear" "apple" "grape"))
 "apple"
@@ -2060,7 +2060,7 @@ first element of a list that matches some test.
 The `begins` function returns true iff its first argument is a list 
 that begins with its second argument:
 
-```lisp
+```
 > (begins '(a b c d e) '(a b))
 t
 ```
@@ -2071,7 +2071,7 @@ to `=`.
 It's used in `caris`, which returns true iff its first argument is a 
 pair whose car is its second.
 
-```lisp
+```
 > (caris '(a b) 'a)
 t
 ```
@@ -2084,7 +2084,7 @@ Our next function, `hug`, applies a function to pairs of elements of a
 list. Since the default function is list, by default it simply 
 returns pairs of elements.
 
-```lisp
+```
 > (hug '(a b c d e))
 ((a b) (c d) (e))
 > (hug '(1 2 3 4 5) +)
@@ -2097,7 +2097,7 @@ that form implicit pairs. We've seen this already in `if`, `case`, and
 `iflet`, and we see it implemented with `hug` in the next macro, `with`, 
 which is a multi-variable `let`.
 
-```lisp
+```
 > (with (x 'a 
          y 'b) 
     (cons x y))
@@ -2108,7 +2108,7 @@ It binds the variables in parallel in the sense that the bindings of
 previous variables are not visible in the expressions defining the 
 values of later ones.
 
-```lisp
+```
 > (let x 'a
     (with (x 'b
            y x)
@@ -2119,14 +2119,14 @@ a
 The next function, `keep`, returns all the elements of a list that pass 
 some test
 
-```lisp
+```
 > (keep odd '(1 2 3 4 5))
 (1 3 5)
 ```
 
 and `rem` removes its first argument from a list
 
-```lisp
+```
 > (rem \a "abracadabra")
 "brcdbr"
 ```
@@ -2135,7 +2135,7 @@ or more precisely, since it takes an optional comparison function `f`,
 all the elements of the list that fail `[f _ x]`, where `x` is the first 
 argument.
 
-```lisp
+```
 > (rem 4 '(5 3 1 2 4) >=)
 (3 1 2)
 ```
@@ -2143,14 +2143,14 @@ argument.
 The next two functions, `get` and `put`, are for operating on key-value
 stores represented as lists of pairs like this one:
 
-```lisp
+```
 > (set x '((a . 1) (b . 2) (c . 3)))
 ((a . 1) (b . 2) (c . 3))
 ```
 
 The first, `get`, retrieves entries,
 
-```lisp
+```
 > (get 'a x)
 (a . 1)
 > (get 'z x)
@@ -2159,7 +2159,7 @@ nil
 
 and the second, `put`, creates them.
 
-```lisp
+```
 > (put 'z 26 x)
 ((z . 26) (a . 1) (b . 2) (c . 3))
 > (put 'a 9 x)
@@ -2175,7 +2175,7 @@ something onto `x` wouldn't change the value of it.
 
 The function `rev` reverses a list,
 
-```lisp
+```
 > (rev "able")
 "elba"
 ```
@@ -2183,7 +2183,7 @@ The function `rev` reverses a list,
 and `snap` breaks off a piece of its second argument that's as long as
 its first, returning both parts:
 
-```lisp
+```
 > (snap '(a b) '(1 2 3 4 5))
 ((1 2) (3 4 5))
 ```
@@ -2191,14 +2191,14 @@ its first, returning both parts:
 It's used in `udrop` (for "unary drop"), which returns just the 
 remaining part:
 
-```lisp
+```
 > (udrop '(a b) '(1 2 3 4 5))
 (3 4 5)
 ```
 
 Then we get the identity function, `idfn`:
 
-```lisp
+```
 > (map idfn '(a b c))
 (a b c)
 ```
@@ -2209,7 +2209,7 @@ using it as a default or when operating on functions.
 The function `is` is a little unusual in that it returns a function for
 comparing its argument to something. 
 
-```lisp
+```
 > ((is 'a) 'a)
 t
 ```
@@ -2226,7 +2226,7 @@ One thing we see being used for the first time here is dynamic
 binding. To show how it works, we'll define a function that refers to 
 a variable with no global value:
 
-```lisp
+```
 (def foo ()
   snerg)
 ```
@@ -2235,7 +2235,7 @@ If we call foo normally, we'll get an error saying `snerg` has no
 value. But if we call `foo` within a `dyn` expression that creates a
 dynamic binding for `snerg`, it will work:
 
-```lisp
+```
 > (dyn snerg 'a 
     (foo))
 a
@@ -2243,7 +2243,7 @@ a
 
 We couldn't get the same result by saying
 
-```lisp
+```
 (let snerg 'a
   (foo))
 ```
@@ -2265,7 +2265,7 @@ continuation, which you can then save. Let's try making one.
 
 Here's some simple code that makes a list:
 
-```lisp
+```
 > (list 'a 'b)
 (a b)
 ```
@@ -2273,7 +2273,7 @@ Here's some simple code that makes a list:
 Now let's try replacing the 'b with an expression that saves the 
 current continuation before returning b:
 
-```lisp
+```
 > (list 'a (ccc (fn (c) 
                   (set cont c) 
                   'b)))
@@ -2285,14 +2285,14 @@ continuation at the point where the `ccc` occurred. If we call `cont`
 with some value, our old computation will be restarted as if that 
 value had been returned by the `ccc` expression:
 
-```lisp
+```
 > (cont 'z)
 (a z)
 ```
 
 Continuations work any number of times:
 
-```lisp
+```
 > (cont 'w)
 (a w)
 ```
@@ -2301,7 +2301,7 @@ One thing we can use continuations for is aborting computations. If
 we save a continuation before starting something, then by calling the 
 continuation we can escape from the middle of it.
 
-```lisp
+```
 > (ccc (fn (c) 
          (dyn abort c 
            (do (abort 'a)
@@ -2312,7 +2312,7 @@ a
 Here we bind `abort` to the continuation before we start evaluating the 
 do expression. The second expression within the `do`
 
-```lisp
+```
 (car 'b)
 ```
 
@@ -2325,7 +2325,7 @@ error. So if the variable that we dynamically bind is `err` instead of
 
 Here we rebind err to return hello when an error occurs:
 
-```lisp
+```
 > (ccc (fn (c) 
          (dyn err (fn (x) (c 'hello))
            (car 'b))))
@@ -2342,7 +2342,7 @@ You can probably imagine how you'd write a macro to evaluate an
 expression in an error-proof way: just make the expansion put the
 expression within something like
 
-```lisp
+```
 (ccc (fn (c)
        (dyn err (fn (x) (c nil))
          expression)))
@@ -2354,7 +2354,7 @@ Now let's look at `eif`. It's like if except that which of its
 arguments get evaluated depends not on whether its test expression
 returns true, but whether it causes an error.
 
-```lisp
+```
 > (eif x (car 'a)
          'oops
          x)
@@ -2371,7 +2371,7 @@ or to whatever err was called with if an error occurred.
 
 The expansion of the first `eif` above looks like
 
-```lisp
+```
 (let v (join)
   (let w (ccc (fn (c)
                 (dyn err [c (cons v _)] (car 'a))))
@@ -2400,7 +2400,7 @@ oops
 and the `safe` macro simply returns `nil` if the expression within
 it causes an error:
 
-```lisp
+```
 > (safe (car '(a b)))
 a
 > (safe (car 'a))
@@ -2410,7 +2410,7 @@ nil
 The next function, `literal`, returns true iff its argument evaluates 
 to itself,
 
-```lisp
+```
 > (map literal (list nil "foo" car))
 (t t t)
 ```
@@ -2418,7 +2418,7 @@ to itself,
 while `variable` returns true iff its argument is a variable, meaning
 an ordinary symbol or a `uvar`:
 
-```lisp
+```
 > (map variable (list 'x (uvar) t))
 (t t nil)
 ```
@@ -2427,7 +2427,7 @@ And `isa` is for checking whether something is a particular kind of
 `lit`. Like `is`, `isa` doesn't do the check, but returns a function that
 does
 
-```lisp
+```
 > ((isa 'clo) map)
 t
 ```
@@ -2446,7 +2446,7 @@ structures, and these always have the same parameter names.
 
 Each thread is a list 
 
-```lisp
+```
 (s r)
 ```
 
@@ -2455,7 +2455,7 @@ of two stacks: a stack `s` of expressions to be evaluated, and a stack
 
 Each element of `s` is in turn a list
 
-```lisp
+```
 (e a)
 ```
 
@@ -2471,7 +2471,7 @@ of `(var . val)` pairs. I use the variable `g` for this.
 
 The most common parameter list we'll see is 
 
-```lisp
+```
 (s r m)
 ```
 
@@ -2484,7 +2484,7 @@ expression `e` and starts the interpreter running with a single thread
 in which `e` is to be evaluated. The arguments it sends to ev represent 
 the usual `(s r m)` triple. So 
 
-```lisp
+```
 (list (list e nil))
 ```
 
@@ -2523,7 +2523,7 @@ call to the interpreter with a shorter expression stack and the
 return value `cons`ed onto the return stack. And that's what we see 
 happening in the code that runs when `e` is a literal:
 
-```lisp
+```
 (mev s (cons e r) m)
 ```
 
@@ -2557,7 +2557,7 @@ Now that we've seen how `mev` and `sched` work, let's return to `ev`. If `e`
 is a variable, we call `vref` to evaluate it. And what `vref` ordinarily 
 does is this:
 
-```lisp
+```
 (aif (lookup v a s g)
      (mev s (cons (cdr it) r) m)
      (sigerr 'unbound s r m))
@@ -2609,7 +2609,7 @@ But what about the first half of `vref`, the one in which `(inwhere s)`
 returns true? This code is for handling assignments. In Bel, any
 value that lives in a pair can be assigned using `set`. For example,
 
-```lisp
+```
 > (let x '(a b c)
     (set (cadr x) 'z)
     x)
@@ -2655,7 +2655,7 @@ The first of these is `smark`, the pair we created for marking stack
 entries that are not just ordinary expressions. The initial value of 
 `forms`
 
-```lisp
+```
 (set forms (list (cons smark evmark)))
 ```
 
@@ -2677,7 +2677,7 @@ stack once we'd found it. So if we return up through a `loc` entry,
 that means we were unable to find a pair to modify, and we should 
 signal an error. E.g.
 
-```lisp
+```
 > (set \a 5)
 Error: unfindable
 ```
@@ -2717,7 +2717,7 @@ and returns it unevaluated.
 The definition of `quote` will be transformed by `formfn` into the 
 equivalent of
 
-```lisp
+```
 (fn v
   (eif w (apply (fn (e) (list e))
                 (car v))
@@ -2739,7 +2739,7 @@ that one. At least not short of using a single parameter to hold all
 the arguments, and then teasing them out manually. Since that would 
 make form definitions ugly, the `form` macro does it for you.
 
-```lisp
+```
 > (quote a b)
 Error: bad-form
 ```
@@ -2755,7 +2755,7 @@ argument and then, if there are more arguments, evaluate the
 appropriate one depending on the value of the first. Which is 
 basically the code translated into English. Putting
 
-```lisp
+```
 (list (car es) a)
 ```
 
@@ -2775,20 +2775,20 @@ succeeding expression, so we just put `(car es)` onto the stack and go.
 But if the first expression returned `nil`, we need to keep going.
 If we're evaluating
 
-```lisp
+```
 (if a b c d e)
 ```
 
 and `a` returns `nil`, then the value of the `if` expression is the value
 of 
 
-```lisp
+```
 (if c d e)
 ```
 
 and that is exactly what `if2` is doing when it puts 
 
-```lisp
+```
 (cons 'if (cdr es))
 ```
 
@@ -2810,7 +2810,7 @@ argument saying whether to create a new binding for a variable if
 there isn't one already. It asks for `e` to be evaluated by putting
 the conventional
 
-```lisp
+```
 (list e a)
 ```
 
@@ -2819,7 +2819,7 @@ on the stack saying that what we want when evaluating `e` is its
 location, not its value. This will be seen by `inwhere` in functions 
 like `vref` and handled accordingly.
 
-```lisp
+```
 > (let x 'a
     (where x))
 ((x . a) d)
@@ -2854,7 +2854,7 @@ global or lexical variables also sets dynamic bindings; in fact, the
 code doesn't even know which type it's operating on; all it knows is 
 that it's doing something to the `cdr` of a pair.
 
-```lisp
+```
 > (dyn x 'a
     (do (set x 'b) 
         x))
@@ -2908,7 +2908,7 @@ function within the macro, `(caddr mac)`, to the unevaluated arguments,
 has to be evaluated, and that's the purpose of this closure we put on
 the stack: 
 
-```lisp
+```
 (fu (s r m)
   (mev (cons (list (car r) a) s)
        (cdr r)
@@ -2929,14 +2929,14 @@ Functions aren't the only thing you can apply in Bel. You can apply
 anything if you define a way to do it. We haven't gotten to this yet, 
 but numbers for example return the corresponding element of a list:
 
-```lisp
+```
 > (3 '(a b c d))
 c
 ```
 
 Such expressions are also settable:
 
-```lisp
+```
 > (let x '(a b c d)
     (set (3 x) 'z)
     x)
@@ -2960,7 +2960,7 @@ will handle most cases. When we look at the `loc` for `car`, it's pretty
 simple: it just "returns" (by consing onto the return stack) a list 
 of the argument and an `a`, to indicate we're looking in the `car`.
 
-```lisp
+```
 > (let x '(a b c) 
     (where (car x)))
 ((a b c) a)
@@ -2984,7 +2984,7 @@ Since primitives can take at most two arguments, we pick out two,
 which we call `a` and `b`. Since `car` and `cdr` of `nil` both yield `nil`, this 
 is how we make missing arguments to primitives default to `nil`. 
 
-```lisp
+```
 > (join)
 (nil)
 ```
@@ -3034,14 +3034,14 @@ Before we look at them I should explain a feature of Bel parameter
 lists that we haven't encountered yet: type checking. A parameter of 
 the form 
 
-```lisp
+```
 (t v f)
 ```
 
 means that unless `f` is true of the value passed to `v`, an error will 
 be signalled. So if we define
 
-```lisp
+```
 (def consa ((t xs pair)) 
   (cons 'a xs))
 ```
@@ -3049,7 +3049,7 @@ be signalled. So if we define
 and we call it with an argument that's not a pair, we'll get an 
 error:
 
-```lisp
+```
 > (consa 'z)
 Error: mistype
 ```
@@ -3057,7 +3057,7 @@ Error: mistype
 If the variable and test in a `t` parameter are symbols, you can simply 
 conjoin them with a vertical bar.
 
-```lisp
+```
 (def consa (xs|pair)
   (cons 'a xs))
 ```
@@ -3067,7 +3067,7 @@ The reader expands `x|y` into `(t x y)`.
 You can nest `t` parameters, `o` parameters, and parameters that are 
 pairs without restriction. 
 
-```lisp
+```
 (def foo ((o (t (x . y) [caris _ 'a]) '(a . b)))
   x)
 
@@ -3154,7 +3154,7 @@ If `arg` is `nil` and the first parameter in our list isn't an optional
 one, then we know the function was called with too few arguments,
 and we signal an error.
 
-```lisp
+```
 > ((fn (x y) x) 'a)
 Error: underargs
 ```
@@ -3163,7 +3163,7 @@ The other error case is when `arg` is a non-nil atom. We can match such
 an argument with a single parameter, but not with a list of 
 parameters. So if `arg` is an atom, we signal an error.
 
-```lisp
+```
 > ((fn ((x y)) x) 'a)
 Error: atom-arg
 ```
@@ -3178,7 +3178,7 @@ building as the environment when it puts expressions on the stack
 means the bindings of earlier parameters are visible to the code in 
 later ones:
 
-```lisp
+```
 > ((fn (x (o y x)) y) 'a)
 a
 > ((fn (f x|f) x) pair 'a)
@@ -3203,13 +3203,13 @@ it's just a list of `s` and `r`. The work is done when the continuation
 is called. But even then it's not that much work. If a continuation 
 is 
 
-```lisp
+```
 (lit cont s2 r2)
 ```
 
 you could call it on an argument a simply by saying
 
-```lisp
+```
 (mev s2 (cons a r2) m)
 ```
 
@@ -3230,7 +3230,7 @@ continuations. Otherwise it would be one line in `applylit`.
 Finally, in the last clause of `applylit`, we see the code that makes
 it possible, for example, to use a number in functional position:
 
-```lisp
+```
 > (2 '(a b c))
 b
 ```
@@ -3244,7 +3244,7 @@ they're a lot like macros.
 Although we haven't introduced numbers yet, here's the virtual 
 function for them, so you can see what one looks like:
 
-```lisp
+```
 (vir num (f args)
   `(nth ,f ,@args))
 ```
@@ -3252,13 +3252,13 @@ function for them, so you can see what one looks like:
 It looks like a macro definition, and does much the same thing.  It 
 will turn 
 
-```lisp
+```
 (2 '(a b c))
 ```
 
 into
 
-```lisp
+```
 (nth 2 '(a b c))
 ```
 
@@ -3268,14 +3268,14 @@ numbers and I/O, but we have now seen the entire Bel interpreter.
 Next come several functions for operating on functions. The first,
 `function`, tells whether something is a function and if so what kind.
 
-```lisp
+```
 > (map function (list car append 'foo))
 (prim clo nil)
 ```
 
 The next, `con`, returns a constant function:
 
-```lisp
+```
 > (map (con 'yo) '(a b c))
 (yo yo yo)
 ```
@@ -3284,7 +3284,7 @@ Then comes an important one, `compose`, which takes any number of
 functions and returns their composition. For example, `cadr` is 
 equivalent to a composition of `car` and `cdr`:
 
-```lisp
+```
 > ((compose car cdr) '(a b c))
 b
 ```
@@ -3292,7 +3292,7 @@ b
 When the names of what you're composing are symbols or numbers, Bel 
 lets you abbreviate calls to compose with colons. 
 
-```lisp
+```
 > (car:cdr '(a b c))
 b
 ```
@@ -3303,14 +3303,14 @@ the Bel source are not in truly idiomatic Bel, because that would
 require things that hadn't been defined yet. Composition is one of 
 them. If you had to define `cadr` in idiomatic Bel you'd say
 
-```lisp
+```
 (set cadr car:cdr)
 ```
 
 There's a special abbreviation for composing `no`, which is to prepend 
 a tilde.
 
-```lisp
+```
 > (map ~cdr '((a) (a b c) (a b)))
 (t nil nil)
 ```
@@ -3318,7 +3318,7 @@ a tilde.
 Now we can understand the idiomatic definition of all that I gave 
 early on:
 
-```lisp
+```
 (def all (f xs)
   (~some ~f xs))
 ```
@@ -3326,7 +3326,7 @@ early on:
 It's actually inaccurate to say that `compose` operates on functions,
 because it can operate on anything that we can call like a function.
 
-```lisp
+```
 > (2:or nil '(a b c))
 b
 ```
@@ -3342,13 +3342,13 @@ The next function, `combine`, produces something more general: it takes
 one argument, `f`, and returns a function that combines functions using 
 `f`. So this for example 
 
-```lisp
+```
 ((combine and) car cdr)
 ```
 
 will yield a function equivalent to
 
-```lisp
+```
 (fn (x)
   (and (car x) (cdr x)))
 
@@ -3360,7 +3360,7 @@ will yield a function equivalent to
 Since combine of `and` and `or` are so frequently needed, we predefine
 two functions, cand and cor, for those cases.
 
-```lisp
+```
 > ((cand pair cdr) '(a b))
 (b)
 > ((cor char pair) 'a)
@@ -3372,7 +3372,7 @@ Once again, their definitions are complicated by taking any number of
 arguments, and they're easier to understand if we start with 
 three-argument versions:
 
-```lisp
+```
 (def foldl3 (f base xs)
   (if (no xs)
       base
@@ -3392,7 +3392,7 @@ builds its value on the way back up.
 Here is a series of equivalent calls showing how a left fold plays 
 out:
 
-```lisp
+```
 (foldl3 cons nil '(a b))
 (foldl3 cons (cons 'a nil) '(b))
 (foldl3 cons (cons 'b (cons 'a nil)) nil)
@@ -3400,7 +3400,7 @@ out:
 
 This yields `(b a)`. The corresponding right fold,
 
-```lisp
+```
 (foldr3 cons nil '(a b))
 (cons 'a (foldr3 cons nil '(b)))
 (cons 'a (cons 'b (foldr3 cons nil nil)))
@@ -3413,13 +3413,13 @@ where the base case is the last element of the list.
 
 The next function, `of`, is for situations like the following:
 
-```lisp
+```
 (+ (car x) (car y) (car z))
 ```
 
 With it you can write
 
-```lisp
+```
 ((of + car) x y z)
 ```
 
@@ -3427,7 +3427,7 @@ And `upon` is a sort of reverse call, in the sense that it saves an
 argument, and then tells you what calling things on that argument 
 will return:
 
-```lisp
+```
 > (map (upon '(a b c)) 
        (list car cadr cdr))
 (a b (b c))
@@ -3436,25 +3436,25 @@ will return:
 The next function, `pairwise`, returns true iff its first argument is 
 true of every two-element window in the second. For example
 
-```lisp
+```
 (pairwise f '(a b c d))
 ```
 
 is equivalent to
 
-```lisp
+```
 (and (f 'a 'b) (f 'b 'c) (f 'c 'd))
 ```
 
 That expression
 
-```lisp
+```
 (all [id _ (car args)] (cdr args))
 ```
 
 in the definition of `=` would have been
 
-```lisp
+```
 (pairwise id args)
 ```
 
@@ -3466,14 +3466,14 @@ together the results of calling the function on successive elements
 of the lists. Which description incidentally demonstrates the 
 advantage of source code over natural language in a spec.
 
-```lisp
+```
 > (fuse [list 'a _] '(1 2 3))
 (a 1 a 2 a 3)
 ```
 
 We use it in `letu`, which is for creating uvars. In `eif` we had to say 
 
-```lisp
+```
 (with (v (uvar)
        w (uvar)
        c (uvar))
@@ -3482,7 +3482,7 @@ We use it in `letu`, which is for creating uvars. In `eif` we had to say
 
 With letu that becomes
 
-```lisp
+```
 (letu (v w c)
   ...)
 ```
@@ -3493,7 +3493,7 @@ list of variables.
 We use `letu` in `pcase`, which is like a case statement but with 
 predicates as the keys.
 
-```lisp
+```
 > (map [pcase _
          no   'empty
          atom 'atom
@@ -3506,7 +3506,7 @@ The next function, `match`, is like `=` except that functions occurring
 in the second argument are treated as predicates, and ts `match`
 everything.
 
-```lisp
+```
 > (match '(a (b) c d) (list 'a pair 'c t))
 t
 ```
@@ -3514,7 +3514,7 @@ t
 The `split` function breaks its second argument at the point where its
 first argument returns true.
 
-```lisp
+```
 > (split (is \a) "frantic")
 ("fr" "antic")
 ```
@@ -3530,7 +3530,7 @@ and not to provide an efficient implementation.
 
 Numbers in Bel take the form
 
-```lisp
+```
 (lit num (sign n d) (sign n d))
 ```
 
@@ -3540,20 +3540,20 @@ integers (i.e. lists of `t`) representing a numerator and denominator.
 
 So 2/3 is 
 
-```lisp
+```
 (lit num (+ (t t) (t t t)) (+ () (t)))
 ```
 
 and `4-1/2i` is
 
-```lisp
+```
 (lit num (+ (t t t t) (t)) (- (t) (t t)))
 ```
 
 You'll never see this representation unless you go looking for it, 
 because Bel reads and writes numbers in the conventional way.
 
-```lisp
+```
 > (lit num (+ (t t) (t t t)) (+ () (t)))
 2/3
 ```
@@ -3593,7 +3593,7 @@ operation.
 After `buildnum` and `recip` we see the definitions of the `+`, `-`, `*`, and `/` 
 functions that are actually used in programs. 
 
-```lisp
+```
 > (+ .05 (/ 19 20)) 
 1
 ```
@@ -3601,14 +3601,14 @@ functions that are actually used in programs.
 Now that we have numbers we can define some common functions that use 
 them, like `len` for finding the length of a list
 
-```lisp
+```
 > (len "foo")
 3
 ```
 
 and `pos` for finding the position of something in one
 
-```lisp
+```
 > (pos \a "ask")
 1
 ```
@@ -3619,7 +3619,7 @@ We use `pos` in `charn`, which returns a unique integer for each
 character based on its position in chars, a list of all the 
 characters.
 
-```lisp
+```
 > (map charn "abc")
 (97 98 99)
 ```
@@ -3642,7 +3642,7 @@ definition we see the four predefined comparison functions, for
 reals, chars, strings, and symbols. So `<` and `>` work for arguments of 
 those types,
 
-```lisp
+```
 > (> 3/4 2/3)
 t
 > (< 'apple 'apply)
@@ -3662,7 +3662,7 @@ Next comes a familiar name, `yc`. This is the Y combinator, which is
 used to generate recursive functions. It's used in `rfn` to make a 
 recursive function with a name,
 
-```lisp
+```
 > ((rfn foo (x) (if (no x) 0 (inc:foo:cdr x))) '(a b c))
 3
 ```
@@ -3670,7 +3670,7 @@ recursive function with a name,
 and `rfn` in turn is used to define `afn`, which lets you refer to a 
 function within itself as self.
 
-```lisp
+```
 > ((afn (x) (if (no x) 0 (inc:self:cdr x))) '(a b c))
 3
 ```
@@ -3678,7 +3678,7 @@ function within itself as self.
 We use `afn` in `wait`, which takes a function and calls it till it
 returns a non-nil value.
 
-```lisp
+```
 > (set x '(nil nil a b c))
 (nil nil a b c)
 > (wait (fn () (pop x)))
@@ -3692,7 +3692,7 @@ a
 The function `runs` takes a function and a list and breaks up the list 
 into stretches for which the function returns true or false.
 
-```lisp
+```
 > (runs pint '(1 1 0 0 0 1 1 1 0))
 ((1 1) (0 0 0) (1 1 1) (0))
 ```
@@ -3700,7 +3700,7 @@ into stretches for which the function returns true or false.
 Using `whitec`, which returns true of whitespace characters, we can use 
 `runs` to pick the words out of a string:
 
-```lisp
+```
 > (tokens "the age of the essay")
 ("the" "age" "of" "the" "essay")
 ```
@@ -3711,7 +3711,7 @@ you can use it for more than picking out words.
 The function `dups` returns all the elements of a list that occur more 
 than once in it.
 
-```lisp
+```
 > (dups "abracadabra")
 "abr"
 ```
@@ -3726,7 +3726,7 @@ example soon when we get to the queue functions.
 The `consif` function `cons`es something onto the front of a list only if 
 it's non-nil.
 
-```lisp
+```
 > (consif (cadr '(a)) '(x y))
 (x y)
 ```
@@ -3734,7 +3734,7 @@ it's non-nil.
 The `check` macro evaluates an expression and returns its value only if 
 its second argument returns true of it. 
 
-```lisp
+```
 > (check (car '(1 2 3)) odd)
 1
 > (check (car '(1 2 3)) even)
@@ -3744,7 +3744,7 @@ nil
 The optional third argument is an expression to evaluate to get an
 alternate value in case the function returns false.
 
-```lisp
+```
 > (check (car '(1 2 3)) even 2)
 2
 ```
@@ -3753,7 +3753,7 @@ The `withs` macro is like `with` except that the bindings of the
 preceding variables are visible in the expressions defining the
 values of later ones.
 
-```lisp
+```
 > (let x 'a
     (withs (x 'b
             y x)
@@ -3774,28 +3774,28 @@ you can protect them by wrapping an `atomic` around them.
 The `tail` function returns the rest of its second argument from the 
 point where its first argument returns true of it, if any.
 
-```lisp
+```
 > (tail [caris _ \-] "non-nil")
 "-nil"
 ```
 
 The function `dock` takes the last element off a list
 
-```lisp
+```
 > (dock '(a b c))
 (a b)
 ```
 
 while `lastcdr` returns the last non-nil `cdr` of a list
 
-```lisp
+```
 > (lastcdr '(a b c))
 (c)
 ```
 
 and `last` uses it to get the last element.
 
-```lisp
+```
 > (last '(a b c))
 c
 ```
@@ -3807,7 +3807,7 @@ be set to the same queue.
 If you modify the middle of a list that is the value of several
 variables, the modification is shared:
 
-```lisp
+```
 > (set x '(a b c) y x)
 (a b c)
 > (set (cadr x) 'z)
@@ -3822,7 +3822,7 @@ haven't gotten to `push` yet, but I'll use it anyway to make this
 clear. When you push something on the front of a list, you're
 modifying the value of a variable, not the list structure itself.
 
-```lisp
+```
 > (push 'hello x)
 (hello a z c)
 > x
@@ -3835,7 +3835,7 @@ To modify a value that several variables share, you have to be able to
 translate it into changing the `car` or `cdr` of some existing pair. And 
 if the shared value is a list within a list, you can.
 
-```lisp
+```
 > (set x '((a)) y x)
 ((a))
 > y
@@ -3851,7 +3851,7 @@ That's why queues are represented as lists within lists.
 You make a new queue with `newq`, put something in a queue with `enq`,
 and take something off with `deq`.
 
-```lisp
+```
 > (set x (newq))
 (nil)
 > (enq 'a x)
@@ -3874,13 +3874,13 @@ an expression in which a `where` is wrapped around `p`, and then the
 appropriate half of the resulting pair is set to the value of `e`. 
 So e.g. 
 
-```lisp
+```
 (set (car x) 'a)
 ```
 
 is expanded into the equivalent of
 
-```lisp
+```
 (atomic (let v 'a 
           (let (cell loc) (where (car x) t)
             ((case loc a xar d xdr) cell v))))
@@ -3889,7 +3889,7 @@ is expanded into the equivalent of
 We also have a more general macro, `zap`, that modifies the value of
 something by applying a function to it.
 
-```lisp
+```
 > (let x '(a b c)
     (zap cdr x)
     x)
@@ -3909,7 +3909,7 @@ With `zap` it becomes easy to write a whole class of other macros we
 need, like `++` and `--`, which increase and decrease the value of 
 something
 
-```lisp
+```
 > (let x '(1 2 3)
     (++ (car x) 10)       
     (-- (cadr x))
@@ -3920,7 +3920,7 @@ something
 and `push` and `pull`, which put something onto the front of a list and 
 remove something from one
 
-```lisp
+```
 > (let x '(a b c)
     (push 'z x)
     (pull 'c x)
@@ -3930,7 +3930,7 @@ remove something from one
 
 Since `pull` passes the optional comparison function to `rem`, we can say
 
-```lisp
+```
 > (let x '(7 3 0 9 2 4 1)
     (pull 4 x >=)
     x)
@@ -3983,7 +3983,7 @@ returns. I.e. if a source has characters waiting to be read, repeated
 calls to `peek` will return the same character, and repeated calls to 
 `rdc` will return successive ones.
 
-```lisp
+```
 > (let s '("abc")
     (list (peek s) (peek s)))    
 "aa"
@@ -4003,7 +4003,7 @@ Then come some functions for recognizing types of characters.
 Whether a character is a digit depends on the base, which is why 
 `digit` takes an optional base argument.
 
-```lisp
+```
 > (digit \a)
 nil
 > (digit \a i16)
@@ -4049,7 +4049,7 @@ to `smark` and not merely `=` to it. The Bel printer and reader use
 labels of the form `#n`, where `n` is whole number, to mark shared pairs. 
 For example:
 
-```lisp
+```
 > (let x '(a) 
     (list x x))
 (#1=(a) #1)
@@ -4117,7 +4117,7 @@ seeing must be an unbalanced parenthesis.
 There's a similar pattern for `\[` and `\]`, except that we do something 
 with the list we've read: we make it into a fn expression.
 
-```lisp
+```
 > (read '("[cons _ 'b]"))
 (fn (_) (cons _ (quote b)))
 ```
@@ -4136,7 +4136,7 @@ backslash acts as an escape character, meaning whatever occurs next
 is treated as part of the sequence, even if it's the delimiter that 
 would otherwise signal the end.
 
-```lisp
+```
 > "foo\"bar"
 "foo\"bar"
 ```
@@ -4144,7 +4144,7 @@ would otherwise signal the end.
 The escape character is not part of the string, just something used 
 in its representation.
 
-```lisp
+```
 > (mem \\ "foo\"bar")
 nil
 ```
@@ -4153,7 +4153,7 @@ The character `\¦` acts as a delimiter for symbol names that could not
 otherwise be read. It works just like `\"` except that we call sym on 
 the result.
 
-```lisp
+```
 > '¦foo bar¦
 ¦foo bar¦
 ```
@@ -4171,7 +4171,7 @@ something `(e)`, it writes its `car` and `cdr` into the `car` and `cdr` of
 read lists that contain themselves. If we want to be able to read 
 something like
 
-```lisp
+```
 #1=(a #1 b)
 ```
 
@@ -4190,7 +4190,7 @@ bar used in type specs. There is nothing specific to parameter lists
 about this bar, incidentally; it's just something the reader expands 
 into a list beginning with `t`.
 
-```lisp
+```
 > 'for|2  
 (t for 2)
 ```
@@ -4205,32 +4205,32 @@ If there's no vertical bar, we look for the intrasymbol characters
 So for example if you wanted to insist that a parameter was a 
 continuation, instead of expressing the parameter as
 
-```lisp
+```
 (t c (isa 'cont))
 ```
 
 you could just write
 
-```lisp
+```
 c|isa!cont
 ```
 
 and our recent example
 
-```lisp
+```
 (id (2 x) (3 x))
 ```
 
 could have been written 
 
-```lisp
+```
 (id 2.x 3.x)
 ```
 
 I haven't used this notation so far in the Bel spec, but it's quite
 convenient. Any combination of `\.` and `\!` is allowed.
 
-```lisp
+```
 > 'a!b.c
 (a (quote b) c)
 ```
@@ -4238,7 +4238,7 @@ convenient. Any combination of `\.` and `\!` is allowed.
 If there is nothing before the first `\.` or `\!`, the missing symbol is
 treated as an implicit `upon`.
 
-```lisp
+```
 > '!a
 (upon (quote a))
 > (let x '(a . b)
@@ -4250,7 +4250,7 @@ The next level of precedence, represented by `parsecom`, is intrasymbol
 colons. These, as we've seen, are abbreviations for compose 
 expressions.
 
-```lisp
+```
 > 'a:b:c
 (compose a b c)
 ```
@@ -4258,7 +4258,7 @@ expressions.
 The next level of precedence is prepended tildes, which as we've also
 seen are abbreviations for `no` expressions. Here's some of each:
 
-```lisp
+```
 > 'x|~f:g!a
 (t x ((compose (compose no f) g) (quote a)))
 ```
@@ -4284,7 +4284,7 @@ list-building functions cons and append. To get an idea of what we're
 aiming at, here are some backquoted expressions followed by their 
 expansions:
 
-```lisp
+```
   `(x ,y)          (cons (quote x) (cons y nil))
 
   `(x ,@y)         (cons (quote x) (append y nil))
@@ -4305,7 +4305,7 @@ Much of the complexity of `bqex` is due to the need to handle nested
 backquotes. We'll find it easier to understand `bqex` if we start with
 a version that doesn't:
 
-```lisp
+```
 (def bqex1 (e)
   (if (no e)   (list nil nil)
       (atom e) (list (list 'quote e) nil)
@@ -4337,7 +4337,7 @@ value indicating whether anything changed in generating it. For
 example, if we expand an expression containing no commas or 
 comma-ats, nothing need change.
 
-```lisp
+```
 > (bqex1 '(x y z))
 ((quote (x y z)) nil)
 ```
@@ -4352,7 +4352,7 @@ base cases of `bqex1` are for when the whole of `e` is a comma or
 comma-at expression. When it's a `comma` expression, the expansion is 
 simply its argument.
 
-```lisp
+```
 > (bqex1 '(comma x))
 (x t)
 ```
@@ -4360,7 +4360,7 @@ simply its argument.
 But when it's a `comma-at` expression, the expansion is a call to 
 splice:
 
-```lisp
+```
 > (bqex1 '(comma-at x))
 ((splice x) t)
 ```
@@ -4371,7 +4371,7 @@ the expression we're expanding is a naked `comma-at`, meaning one
 that's not within a list, we should signal an error; there's nothing 
 to splice the value into.
 
-```lisp
+```
 > (let x '(a b c)
     `,@x)
 Error: comma-at-outside-list
@@ -4384,45 +4384,45 @@ together to make an expansion for the whole list.
 
 Suppose we're expanding 
 
-```lisp
+```
 `(,x . ,@y)
 ```
 
 The `car` and `cdr` of this list are the two cases we just examined. 
 I.e. within `bqexpair1`
 
-```lisp
+```
 (a achange)
 ```
 
 will be
 
-```lisp
+```
 (x t)
 ```
 
 and 
 
-```lisp
+```
 (d dchange)
 ```
 
 will be
 
-```lisp
+```
 ((splice y) t)
 ```
 
 What happens when these get put together? Since the `car` of `d` is a
 splice expression and the `car` of `a` isn't, we go through this clause
 
-```lisp
+```
 `(apply cons ,a (spd ,(cadr d)))
 ```
 
 yielding
 
-```lisp
+```
 (apply cons x (spd y))
 ```
 
@@ -4436,7 +4436,7 @@ from the examples above. As long as `y` is the right sort of value,
 meaning a list of one element, `spd` simply returns it. But it also
 signals an error if it's not.
 
-```lisp
+```
 > (let x '(b c)
     `(a . ,@x))
 Error: splice-multiple-cdrs
@@ -4448,7 +4448,7 @@ ill-formed.
 
 Here's an example of this expansion in action:
 
-```lisp
+```
 > (with (x 'a y '(b))
     `(,x . ,@y))
 (a . b)
@@ -4465,7 +4465,7 @@ and decrement it (by saying `(car n)`) each time we go through a `comma`
 or `comma-at`. Until the nesting level is nil, whereupon we expand 
 the comma or comma-at as in the examples above.
 
-```lisp
+```
 > (bqex '(bquote (comma (comma x))) nil)
 ((list (quote bquote) (list (quote comma) x)) t)
 ```
@@ -4480,7 +4480,7 @@ never do get called, because they're expanded away. They only get
 called when there are "leftover" commas or comma-ats that don't have 
 matching backquotes.
 
-```lisp
+```
 > (let x '(a b c)
        `,,x)
 Error: comma-outside-backquote
@@ -4511,7 +4511,7 @@ Nearly all the complexity in `prsymbol` is for dealing with symbols
 that need to have `\¦`s around their names because otherwise they'd be 
 unreadable. If it weren't for that possibility, `prsymbol` could be
 
-```lisp
+```
 (map [prc _ s] (nom x))
 ```
 
@@ -4526,7 +4526,7 @@ This in turn calls `rrep` to generate fractional representations of
 unsigned rationals. Bel can read numbers in decimal format, but 
 internally they're rationals and are displayed that way.
 
-```lisp
+```
 > 1.5
 3/2
 ```
@@ -4539,7 +4539,7 @@ structure with anything in names, then we can simply print it as a
 series of characters between double quotes (using `presc` in case there 
 is a double quote in the string).
 
-```lisp
+```
 > "foo"
 "foo"
 ```
@@ -4549,7 +4549,7 @@ one of the shared objects in names. If it is, we have to display it
 using either `#n=...` if it's not in `hist` (meaning this is the first 
 time we're printing it) or as `#n` if it is.
 
-```lisp
+```
 > (let x '(a b c)
     (list x x))
 (#1=(a b c) #1)
@@ -4561,7 +4561,7 @@ calling `print` recursively on the `car`. Then we have to decide how to
 print the `cdr`. If it's simple, or a unique string, or shared 
 structure, we display the list as a dotted list.
 
-```lisp
+```
 > (cons 'a 5)
 (a . 5)
 > (let x '(a b c)
@@ -4571,7 +4571,7 @@ structure, we display the list as a dotted list.
 
 Otherwise we print a space and call `prelts` recursively on rest.
 
-```lisp
+```
 > (append '(a b c) 5)
 (a b c . 5)
 ```
@@ -4581,7 +4581,7 @@ situations. The first is `prn`, which is used to display data, e.g. for
 debugging. It takes any number of arguments and prints them separated 
 by spaces, followed by a newline.
 
-```lisp
+```
 > (with (x "foo" y 'bar)
     (prn 'x x 'y y))
 x "foo" y bar 
@@ -4595,14 +4595,14 @@ The second, `pr`, is for displaying messages to humans. If you're
 looking at data, you want to print strings in double quotes, but if 
 you're printing a message to a user, you probably don't. E.g.
 
-```lisp
+```
 (let user 'Dave 
   (pr "I'm sorry, " user ". I'm afraid I can't do that."))
 ```
 
 will print
 
-```lisp
+```
 I'm sorry, Dave. I'm afraid I can't do that.
 ```
 
@@ -4613,14 +4613,14 @@ the interpreter or `read` or `print`, but are useful in programs.
 
 The `drop` function takes `n` elements off the front of a list
 
-```lisp
+```
 > (drop 2 '(a b c d e))
 (c d e)
 ```
 
 and `nth` returns the `nth` element of one.
 
-```lisp
+```
 > (nth 2 '(a b c d e))
 b
 ```
@@ -4630,7 +4630,7 @@ As I mentioned earlier, lists in Bel are 1-indexed.
 We `use` nth in the virtual function for numbers, which I also included 
 earlier.
 
-```lisp
+```
 > (2 '(a b c))
 b
 ```
@@ -4638,7 +4638,7 @@ b
 We see this in use in `nchar`, which is the converse of `charn`. It
 converts a number to a character.
 
-```lisp
+```
 > (nchar 65)  
 \A
 ```
@@ -4646,7 +4646,7 @@ converts a number to a character.
 The `first` function is the complement of `drop`. It returns a list of 
 the first `n` elements of a list.
 
-```lisp
+```
 > (first 2 '(a b c d e))
 (a b)
 ```
@@ -4656,7 +4656,7 @@ throw control if we want to abort a computation. It dynamically binds
 `throw` to the continuation, so whatever argument we give to `throw` will 
 be returned as the value of the catch expression.
 
-```lisp
+```
 > (catch 
     (throw 'a)
     (/ 1 0))
@@ -4666,7 +4666,7 @@ a
 The `cut` function returns the elements of a list from its second
 argument to its third inclusive,
 
-```lisp
+```
 > (cut "foobar" 2 4)
 "oob"
 ```
@@ -4674,7 +4674,7 @@ argument to its third inclusive,
 unless the second argument is negative, in which case it indicates
 how many elements to take off the end of the list.
 
-```lisp
+```
 > (cut "foobar" 2 -1)
 "ooba"
 ```
@@ -4685,7 +4685,7 @@ which is to when as `aif` is to `if`.
 The `each` macro causes its body to be evaluated with a variable bound 
 to successive elements of a list.
 
-```lisp
+```
 > (let x nil
        (each y '(a b c)
          (push y x))
@@ -4697,7 +4697,7 @@ Now come several functions on functions. The first, `flip`, takes a
 function and returns a function that calls it with the parameters
 reversed.
 
-```lisp
+```
 > ((flip -) 1 10)
 9
 ```
@@ -4706,7 +4706,7 @@ The next, `part`, is for partial application. It takes a function and
 several arguments, and returns a function that will call it with 
 those arguments plus whatever additional ones are supplied.
 
-```lisp
+```
 > ((part cons 'a) 'b)
 (a . b)
 ```
@@ -4714,7 +4714,7 @@ those arguments plus whatever additional ones are supplied.
 As its name suggests, `trap` is a backwards `part`; it puts the newer
 arguments first.
 
-```lisp
+```
 > ((trap cons 'a) 'b)
 (b . a)
 ```
@@ -4722,33 +4722,33 @@ arguments first.
 Finally, `only` takes a function and returns a function that calls it
 only if its first argument is non-nil. So instead of
 
-```lisp
+```
 (let x (f)
   (if x (g x)))
 ```
 
 or 
 
-```lisp
+```
 (aif (f) (g it))
 ```
 
 you can say just
 
-```lisp
+```
 (only.g (f))
 ```
 
 So for example `find`, which we defined 
 
-```lisp
+```
 (def find (f xs)
   (aif (some f xs) (car it)))
 ```
 
 could with `only` and composition be defined
 
-```lisp
+```
 (set find only.car:some)
 ```
 
@@ -4761,14 +4761,14 @@ These are followed by some functions involving numbers, including
 `>=` and `<=`, `floor`, which returns the largest integer `<=` its argument,
 and `ceil`, which returns the smallest integer `>=` its argument.
 
-```lisp
+```
 > (map (upon 3.5) (list floor ceil))
 (3 4)
 ```
 
 The `mod` function returns its first argument modulo its second,
 
-```lisp
+```
 > (mod 17 3)
 2
 ```
@@ -4777,7 +4777,7 @@ Then come a group of macros for iteration. The first, `whilet`,
 evaluates its body while a test expression returns true, with a 
 variable bound to its value.
 
-```lisp
+```
 > (let x '(a b c)
     (whilet y (pop x)
       (pr y))
@@ -4789,7 +4789,7 @@ Then comes the general `loop` macro, which sets a variable to an
 initial value, then updates the value on successive iterations, so 
 long as some test expression is true.
 
-```lisp
+```
 > (loop x 1 (+ x 1) (< x 5) 
     (pr x))
 1234nil
@@ -4798,7 +4798,7 @@ long as some test expression is true.
 Several other iteration macros can then be defined in terms of loop, 
 starting with `while`
 
-```lisp
+```
 > (let x '(a b c)
     (while (pop x)
       (pr x)))
@@ -4808,7 +4808,7 @@ starting with `while`
 The `til` macro evaluates its body with a variable bound to the value 
 of one expression till another expression returns true.
 
-```lisp
+```
 > (let x '(a b c d e)  
     (til y (pop x) (= y 'c)
       (pr y))
@@ -4818,7 +4818,7 @@ ab(d e)
 
 While it might seem as if you could define `whilet` simply as
 
-```lisp
+```
 (mac whilet (var expr . body)
   `(til ,var ,expr (no ,var) ,@body))
 ```
@@ -4829,7 +4829,7 @@ The `for` macro starts a variable at some initial value and then
 increments it by 1 on each succeeding pass through the loop, till it 
 exceeds some threshold.
 
-```lisp
+```
 > (for x 1 10 
     (pr x))
 12345678910nil
@@ -4838,7 +4838,7 @@ exceeds some threshold.
 The `repeat` macro simply evaluates its body a certain number of
 times. 
 
-```lisp
+```
 > (repeat 3 
     (pr 'bang))
 bangbangbangnil
@@ -4847,7 +4847,7 @@ bangbangbangnil
 And the `poll` macro evaluates an expression till a function is true of 
 the result, at which point it's returned.
 
-```lisp
+```
 > (let x '(a b c d e)
     (poll (pop x) is!c)
     x)
@@ -4858,7 +4858,7 @@ The `accum` macro takes a variable and a body of code and evaluates the
 body with the variable lexically bound to a function that accumulates 
 all the values it's called on. It returns the list of values.
 
-```lisp
+```
 > (accum a
     (map (cand odd a) '(1 2 3 4 5)))
 (1 3 5)
@@ -4867,7 +4867,7 @@ all the values it's called on. It returns the list of values.
 It's used in `nof`, which takes a number and an expression and returns 
 the result of evaluating the expression that number of times.
 
-```lisp
+```
 > (nof 10 (rand 10))
 (9 7 6 2 9 1 7 0 0 0)
 ```
@@ -4879,7 +4879,7 @@ some expression till it returns `nil`, or a value passing some other
 optional test, and returns a list of all the values the expression 
 returned.
 
-```lisp
+```
 > (let x '(a b c d e)
     (drain (pop x)))
 (a b c d e)
@@ -4890,7 +4890,7 @@ returned.
 
 The `^w` function returns a number raised to a whole power.
 
-```lisp
+```
 > (^w 2+3i 3)
 -46+9i
 ```
@@ -4909,7 +4909,7 @@ which takes a positive integer `n` and returns a random integer between
 Next come a group of macros for assignment, starting with `wipe`, which 
 sets multiple things to `nil`.
 
-```lisp
+```
 > (let x '(a b c d e)
     (wipe 2.x 4.x)
     x)
@@ -4919,7 +4919,7 @@ sets multiple things to `nil`.
 Then we get the familiar `pop` macro, which takes the first element off 
 a list and returns it.
 
-```lisp
+```
 > (let x '(a b c)  
     (list (pop x) x))
 (a (b c))
@@ -4928,7 +4928,7 @@ a list and returns it.
 Like `any` macro that uses where for assignment, `pop` can operate on any
 pair that you can find a way to refer to.
 
-```lisp
+```
 > (let x '(a b c)
     (pop (cdr x))
     x)
@@ -4938,7 +4938,7 @@ pair that you can find a way to refer to.
 The `clean` macro removes everything from a list for which its first
 argument returns true:
 
-```lisp
+```
 > (let x '(1 2 3 4 5)
     (clean odd x)
     x)
@@ -4947,7 +4947,7 @@ argument returns true:
 
 And `swap` rotates the values of its arguments 
 
-```lisp
+```
 > (let (x y z) '(a b c)
     (swap x y z)
     (list x y z))
@@ -4957,7 +4957,7 @@ And `swap` rotates the values of its arguments
 as a degenerate case of which, if there are two arguments, it swaps 
 their values.
 
-```lisp
+```
 > (let x '(a b c d e)
     (swap 2.x 4.x) 
     x)
@@ -4967,7 +4967,7 @@ their values.
 The `adjoin` function conses something onto a list only if it's not 
 already an element of it.
 
-```lisp
+```
 > (adjoin 'a '(a b c))
 (a b c)
 > (adjoin 'z '(a b c))
@@ -4977,7 +4977,7 @@ already an element of it.
 It's used in `pushnew`, which pushes an element on a list if it's not
 already an element.
 
-```lisp
+```
 > (let x '(a b c d e)
     (pushnew 'a x)
     (pushnew 'z x)
@@ -4988,7 +4988,7 @@ already an element.
 The `dedup` function returns a version of list without the later
 instances of duplicate elements.
 
-```lisp
+```
 > (dedup "abracadabra")
 "abrcd"
 ```
@@ -4997,21 +4997,21 @@ Next come a group of functions involving sorting. The first inserts
 an element into a (presumably sorted) list according to a comparison 
 function `f`.
 
-```lisp
+```
 > (insert < 3 '(1 2 4 5))
 (1 2 3 4 5)
 ```
 
 Then we get `sort` itself, which uses `insert` to sort a list.
 
-```lisp
+```
 > (sort < '(5 1 3 2 4))
 (1 2 3 4 5)
 ```
 
 As much as possible of the original order is preserved.
 
-```lisp
+```
 > (sort (of > len) '((a b) (c) (d e) (f)))
 ((a b) (d e) (c) (f))
 ```
@@ -5019,28 +5019,28 @@ As much as possible of the original order is preserved.
 The `best` function takes a function and a list and returns the
 element of the list that beats the others according to the function.
 
-```lisp
+```
 > (best > '(5 1 3 2 4))
 5
 ```
 
 In case of ties it will return the first.
 
-```lisp
+```
 > (best (of > len) '((a) (b c) (d e) (f)))
 (b c)
 ```
 
 It's used by `max` to return the largest of its arguments
 
-```lisp
+```
 > (max 3 7 2 1)
 7
 ```
 
 and by `min` to return the smallest.
 
-```lisp
+```
 > (min 3 7 2 1)
 1
 ```
@@ -5051,7 +5051,7 @@ the latter with `apply`.
 
 The `even` function returns true of even numbers, and `odd` of odd ones.
 
-```lisp
+```
 > (map upon.3 (list even odd))
 (nil t)
 ```
@@ -5059,7 +5059,7 @@ The `even` function returns true of even numbers, and `odd` of odd ones.
 And `round` rounds its argument to the nearest integer, choosing even
 integers in case of ties.
 
-```lisp
+```
 > (map round '(-2.5 -1.5 -1.4 1.4 1.5 2.5))
 (-2 -2 -1 1 2 2)
 ```
@@ -5069,7 +5069,7 @@ sort of `let` for files; it opens one, lexically binds the resulting
 stream to a variable within the body, then uses an after to make sure 
 the stream gets closed. If we evaluate
 
-```lisp
+```
 (withfile s "foo" 'out
   (print 'hello s)
   (prc \  s)
@@ -5078,7 +5078,7 @@ the stream gets closed. If we evaluate
 
 The file "foo" will contain
 
-```lisp
+```
 hello filesystem
 ```
 
@@ -5086,14 +5086,14 @@ It's used in `from` and `to`, which dynamically bind `ins` and `outs` (the
 default input and output streams) to the newly opened file. So if 
 we say
 
-```lisp
+```
 (to "foo" 
   (map prn '(a b c)))
 ```
 
 then "foo" will end up containing
 
-```lisp
+```
 a
 b
 c
@@ -5101,7 +5101,7 @@ c
 
 and thus
 
-```lisp
+```
 > (from "foo"  
     (drain (read)))
 (a b c)
@@ -5111,7 +5111,7 @@ The function `readall` uses the same technique to read all the objects
 in a file, except it uses a unique pair to signal eof so that it can 
 return nil as well.
 
-```lisp
+```
 > (from "foo"
     (readall))
 (a b c)
@@ -5120,7 +5120,7 @@ return nil as well.
 The load function reads all the objects in a file and also evaluates 
 them. This is how you load a file of code. 
 
-```lisp
+```
 > (to "example.bel"    
     (print '(def foo (x) (cons 'a x))))
 nil
@@ -5134,7 +5134,7 @@ The `record` macro is used for making a transcript. It binds outs to a
 newly created queue, then at the end returns the characters it 
 contains.
 
-```lisp
+```
 > (record
     (pr 'what)
     (pr \ )
@@ -5144,7 +5144,7 @@ contains.
 
 The function `prs` uses it to print its arguments to a string.
 
-```lisp
+```
 > (prs 'what \ "he said")
 "what he said"
 ```
@@ -5156,7 +5156,7 @@ list of n-1 dimensional arrays.
 We can get a new array by giving array a list of dimensions and an 
 optional default value.
 
-```lisp
+```
 > (set a (array '(2 3) 0))
 (lit arr (lit arr 0 0 0) (lit arr 0 0 0))
 ```
@@ -5166,7 +5166,7 @@ Now `a` is a 2x3 array of zeros.
 The `vir` for arrs means we can use arrays as if they were functions on 
 lists of indices, as implemented by `aref`. Vectors are one-indexed.
 
-```lisp
+```
 > (a 1 1)
 0
 ```
@@ -5174,14 +5174,14 @@ lists of indices, as implemented by `aref`. Vectors are one-indexed.
 If we supply fewer indices than the array has dimensions, we get an 
 array back instead of a scalar.
 
-```lisp
+```
 > (a 1)
 (lit arr 0 0 0)
 ```
 
 Like any reference to part of a pair, array references are settable.
 
-```lisp
+```
 > (++ (a 1 1) 5)
 5
 > a
@@ -5190,7 +5190,7 @@ Like any reference to part of a pair, array references are settable.
 
 Including references to subarrays:
 
-```lisp
+```
 > (swap (a 1) (a 2))
 (lit arr 5 0 0)
 > a
@@ -5202,7 +5202,7 @@ key-value stores.
 
 We make a new one by giving table a list of `(key . value)` pairs.
 
-```lisp
+```
 > (set k (table '((a . b) (c . d))))
 (lit tab (a . b) (c . d))
 ```
@@ -5210,7 +5210,7 @@ We make a new one by giving table a list of `(key . value)` pairs.
 The `vir` for tabs means we can use tables as virtual functions on
 keys.
 
-```lisp
+```
 > (k 'a)
 b
 > (k 'z)
@@ -5223,7 +5223,7 @@ Because we define a loc whose test is `isa!tab` and which expands
 into a `tabloc` expression, we can set table entries and also create 
 new ones implicitly.
 
-```lisp
+```
 > (set k!a 1 k!z 2)
 2
 > k
@@ -5232,7 +5232,7 @@ new ones implicitly.
 
 Finally, `tabrem` removes all entries with certain keys from a table.
 
-```lisp
+```
 > (tabrem k 'z)
 ((a . 1) (c . d))
 > k
@@ -5248,7 +5248,7 @@ We call `tem` with the name of the template followed by pairs of field
 names and expressions to generate default values for those fields. 
 E.g. this defines a two-dimensional point:
 
-```lisp
+```
 (tem point x 0 y 0)
 ```
 
@@ -5258,7 +5258,7 @@ default value is needed.
 
 Having defined `point`, we can make new instances with make
 
-```lisp
+```
 > (set p (make point))
 (lit tab (x . 0) (y . 0))
 ```
@@ -5266,7 +5266,7 @@ Having defined `point`, we can make new instances with make
 We can supply initial arguments if we want, and if we do they 
 override the defaults.
 
-```lisp
+```
 > (set q (make point x 1 y 5))
 (lit tab (x . 1) (y . 5))
 ```
@@ -5278,7 +5278,7 @@ maximum flexibility the language doesn't do it for you.
 Since instances are tables, we can do to them everything we can do to 
 tables. 
 
-```lisp
+```
 > p!x
 0
 > (++ p!x)
@@ -5295,14 +5295,14 @@ alarming depending on how you feel about such things.
 We start to see the potential of intrasymbol characters and upon in 
 functions like this one
 
-```lisp
+```
 (set above (of > !y))
 ```
 
 which tells if points are above another in the sense of having
 greater y-coordinates.
 
-```lisp
+```
 > (above q p (make point))
 t
 ```
