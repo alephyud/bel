@@ -5,7 +5,7 @@ This is a mirror of the [Bel language](http://paulgraham.com/bel.html) web page.
 While the original web page is in plain text, this page adds minor Markdown-based typographical improvements and syntax highlighing (based on the existing Lisp syntax highlighting rules). The purpose of creating this page on Github was to make Bel language documentation easier to read - for my own convenience as well as to promote the awareness and discussion of the Bel language and Paul Graham's logic and ideas behind its creation.
 
 - Below is the text of the [language guide](https://sep.yimg.com/ty/cdn/paulgraham/bellanguage.txt?t=1570993483&) in Markdown.
-- [This](./bel.bel.lisp) is Bel's [source code](https://sep.yimg.com/ty/cdn/paulgraham/bel.bel?t=1570993483&) (`.lisp` extension is added for syntax highlighting);
+- [This](./bel.bel) is Bel's [source code](https://sep.yimg.com/ty/cdn/paulgraham/bel.bel?t=1570993483&)
 - [This](./examples.md) is the file of Bel [code examples](https://sep.yimg.com/ty/cdn/paulgraham/belexamples.txt?t=1570993483&).
 
 ## The Bel Language guide
@@ -881,7 +881,7 @@ Starting with the foregoing 25 operators, we're going to define more,
 till we can define a Bel interpreter. Then we'll continue, defining
 numbers, I/O, and several other things one needs in programs.
 
-These definition are in the [Bel source](./bel.bel.lisp), which is meant to be read in
+These definition are in the [Bel source](./bel.bel), which is meant to be read in
 parallel with this guide.
 
 In the Bel source, when you see an expression of the form 

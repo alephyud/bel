@@ -122,4 +122,4 @@ And here's the `pop` macro:
 ```
 
 The best way to see what Bel programs are like, of course, is to read
-the [Bel source](./bel.bel.lisp), which is a Bel program.
+the [Bel source](./bel.bel), which is a Bel program.
